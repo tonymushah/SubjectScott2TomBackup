@@ -1,0 +1,17 @@
+#!/bin/bash
+
+source ./.env
+
+#build
+    ./build 
+
+# Copier les fichiers web (web.xml, JSP, etc.)
+cp -r $WEB_DIR/* $TARGET_DIR/
+
+cd $TARGET_DIR || exit
+jar -cvf $APP_NAME.war *
+cd ..
+
+# Déploiement dans Tomcat
+cp -f $TARGET_DIR/$APP_NAME.war $TOMCAT_WEBAPPS/
+

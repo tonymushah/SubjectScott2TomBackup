@@ -1,0 +1,12 @@
+#!/bin/bash
+source ./.env
+mkdir -p "$TARGET_DIR"
+
+JAR=$(ls $LIB_DIR/* | tr '\n' ':')
+
+find "$SRC_DIR" -name "*.java" > sources.txt
+javac -cp $JAR -d "$TARGET_DIR/WEB-INF/classes" @sources.txt 
+
+rm sources.txt
+
+echo "Compilation finie"

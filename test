@@ -1,0 +1,11 @@
+#!/bin/bash
+source ./.env
+JAR=$(ls $LIB_DIR/* | tr '\n' ':')
+
+for x in $(find "$TEST_DIR" -name "*.class");do 
+    filename=$(basename "$x")
+    classname="${filename%.class}"
+    echo -n "Éxecution : "
+    echo "$classname"
+    java -cp "$TARGET_DIR/WEB-INF/classes:$JAR" -ea  "debug.$classname"
+done
