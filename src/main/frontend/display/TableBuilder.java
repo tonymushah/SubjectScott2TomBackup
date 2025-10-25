@@ -1,4 +1,4 @@
-package main.display;
+package main.frontend.display;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;

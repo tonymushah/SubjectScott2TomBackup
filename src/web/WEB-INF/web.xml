@@ -10,22 +10,11 @@
     
       <servlet>
         <servlet-name>TrServlet</servlet-name>
-        <servlet-class>main.other.TransactionUpdateServlet</servlet-class>
+        <servlet-class>main.frontend.servlet.InsertSalaireServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>TrServlet</servlet-name>
         <url-pattern>/trUpdate</url-pattern>
-    </servlet-mapping>
-
-    
-    <servlet>
-        <servlet-name>SRC</servlet-name>
-        <servlet-class>main.other.ShowResultSet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>SRC</servlet-name>
-        <url-pattern>/showRs</url-pattern>
     </servlet-mapping>
 </web-app>

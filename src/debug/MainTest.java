@@ -24,12 +24,12 @@ public class MainTest {
       newEmp.setFieldFromString("HIREDATE","2026-10-25");
       // System.out.println(""+newEmp);
       //  Connection conn = DBconnect.connect();
-      //  newEmp.insert(conn);
+      //  newEmp.insertByConn(conn);
       //  for (Object o : newEmp.find(conn)) {
       //  System.out.println(""+o.toString());
       //  } 
-      //  newEmp.delete(conn);
+      //  newEmp.deleteByConn(conn);
       //  conn.commit();
       System.out.println(""+newEmp.getFieldToString("EMPNO"));
     }
-}
+  }

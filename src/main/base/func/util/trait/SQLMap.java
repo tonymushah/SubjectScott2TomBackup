@@ -7,5 +7,5 @@ import java.util.Vector;
 import main.base.Err.NoDataToUpdateErr;
 
 public interface SQLMap {
-    public Vector<Object> find(Connection conn) throws SQLException, ReflectiveOperationException, NoDataToUpdateErr;
+    public Vector<Object> findByConn(Connection conn) throws SQLException, ReflectiveOperationException, NoDataToUpdateErr;
 }
