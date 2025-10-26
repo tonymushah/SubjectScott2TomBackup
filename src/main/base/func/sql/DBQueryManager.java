@@ -18,7 +18,7 @@ public class DBQueryManager {
 
         Class<?> eClass = eObject.getClass();
         LinkedHashMap<String, Object> columns = new LinkedHashMap<>();
-        for (Field eField : eClass.getDeclaredFields()) {
+        for (Field eField : ReflectiveManager.getFieldRecursives(eClass)) {
             Object valueField = ReflectiveManager.getFieldObject(eField, eObject);
             if (valueField == null) {
                 continue;
@@ -30,12 +30,17 @@ public class DBQueryManager {
         return columns;
     }
 
-    public static void fillpstmt0(PreparedStatement pstmt, LinkedHashMap<String, Object> nonNullColumns)
+    public static int fillpstmt0(PreparedStatement pstmt, LinkedHashMap<String, Object> nonNullColumns)
             throws SQLException {
         int index = 1;
-        for (Object value : nonNullColumns.values()) {
+       return fillpstmt0(pstmt, nonNullColumns,index);
+    }
+    public static int fillpstmt0(PreparedStatement pstmt, LinkedHashMap<String, Object> nonNullColumns,int index) throws SQLException{
+         for (Object value : nonNullColumns.values()) {
             pstmt.setObject(index++, value);
         }
+        
+        return index;
     }
 
      public static void fillpstmtForUpdate(PreparedStatement pstmt,

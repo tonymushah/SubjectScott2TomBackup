@@ -39,9 +39,8 @@ public class DBClassManager {
         return results;
     }
 
-    public static Vector<Object> findObject0(PreparedStatement pStatement, Object where) throws SQLException, ReflectiveOperationException {
+    public static Vector<Object> findObject0(PreparedStatement pStatement,Class<?> clazz) throws SQLException, ReflectiveOperationException {
         ResultSet rs = pStatement.executeQuery();
-        Class<?> clazz = where.getClass();
         Vector<Object> retour = RsIntoVector(rs, clazz);
         rs.close();
         pStatement.close();
@@ -50,7 +49,7 @@ public class DBClassManager {
     public static Vector<Object> findObject0(Connection conn, Object where, String tableName)
             throws SQLException, ReflectiveOperationException {
         PreparedStatement pStatement = DBQueryManager.getPstmtFind(conn, tableName, where);
-        return findObject0(pStatement, where);
+        return findObject0(pStatement, where.getClass());
     }
 
     public static void DeleteObject0(Connection conn, Object where, String tableName)
@@ -62,6 +61,7 @@ public class DBClassManager {
 
     public static Object mapResultSetToObject(ResultSet rs, Class<?> clazz)
             throws ReflectiveOperationException, SQLException {
+        System.out.println(""+clazz);
         Object map = clazz.getDeclaredConstructor().newInstance();
         ResultSetMetaData metaData = rs.getMetaData();
         int columnCount = metaData.getColumnCount();

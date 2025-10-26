@@ -20,6 +20,7 @@ public static void setFieldObject(Field f, Object e, Object value) throws NoSuch
     java.lang.reflect.Method setter = e.getClass().getMethod(setterName, valueType);
     setter.invoke(e, value);
 }
+
  public static Vector<Field> getFieldRecursives(Class<?> clazz) {
         Vector<Field> fields = new Vector<>();
         Class<?> current = clazz;
@@ -40,7 +41,7 @@ public static void setFieldObject(Field f, Object e, Object value) throws NoSuch
     while (current != null) {
         try {
             Field field = current.getDeclaredField(fieldName);
-            field.setAccessible(true);
+           // field.setAccessible(true);
             return field;
         } catch (NoSuchFieldException e) {
             current = current.getSuperclass(); 

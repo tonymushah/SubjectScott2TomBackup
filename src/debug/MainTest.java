@@ -1,11 +1,6 @@
 package debug;
 import main.base.Err.FromStringException;
 import main.base.Err.NoDataToUpdateErr;
-import main.base.context.DBconnect;
-import main.base.func.special.SpecialQueryBuilder;
-import main.base.func.sql.DBClassManager;
-import main.map.V_SALAIRE_EMP_PROCHE;
-
 //import main.base.context.DBconnect;
 import java.sql.*;
 public class MainTest {
@@ -34,8 +29,6 @@ public class MainTest {
       // //  newEmp.deleteByConn(conn);
       // //  conn.commit();
       // System.out.println(""+newEmp.getFieldToString("EMPNO"));
-      PreparedStatement ps=SpecialQueryBuilder.getPstmtFor_SALAIRE_EMP(DBconnect.connect(), "2026-10-25", "V_SALAIRE_EMP_PROCHE");
-      DBClassManager.findObject0(ps,new V_SALAIRE_EMP_PROCHE());
 
     }
   }

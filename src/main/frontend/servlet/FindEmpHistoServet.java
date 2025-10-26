@@ -19,14 +19,17 @@ public class FindEmpHistoServet extends HttpServlet{
    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out=resp.getWriter();
         resp.setContentType("text/html");
-        String date=req.getParameter("DATE-REQUIRED");
-        V_SALAIRE_EMP_PROCHE se=new V_SALAIRE_EMP_PROCHE();
-        ServletHelper.FillSetable(req.getParameterMap(), se);
-        out.println("EMPNO : "+se.getEMPNO());
+        String date=req.getParameter("DATE-REQUIRED").trim();
+        V_SALAIRE_EMP_PROCHE where=new V_SALAIRE_EMP_PROCHE();
+        ServletHelper.FillSetable(req.getParameterMap(), where);
+       //where.setEMPNO(7934);
         try {
-            Vector<Object> lo=se.findEmp(date);
+            out.println(""+date);
+            out.println(""+where);
+            Vector<Object> lo=V_SALAIRE_EMP_PROCHE.findEmp(date,where);
+
             if(lo.isEmpty()){
-                
+               out.println("empty");
             }else{
             out.println(""+TableBuilder.createTable(lo));
             }
