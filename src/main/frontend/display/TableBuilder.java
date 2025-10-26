@@ -9,7 +9,7 @@ import main.base.func.util.ReflectiveManager;
 public class TableBuilder {
      public static String createRow0(Class<?> clazz, Object obj) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         StringBuilder sb = new StringBuilder();
-        for (Field f : clazz.getDeclaredFields()) {
+        for (Field f : ReflectiveManager.getFieldRecursives(clazz)) {
             Object fObject = ReflectiveManager.getFieldObject(f, obj);
                sb.append("<td>").append("" + fObject).append("</td>");
             }
@@ -25,7 +25,7 @@ public class TableBuilder {
 
     public static String createHeader0(Class<?> clazz) {
         StringBuilder sb = new StringBuilder();
-        for (Field f : clazz.getDeclaredFields()) {
+        for (Field f : ReflectiveManager.getFieldRecursives(clazz)) {
                 sb.append("<th>").append(FieldHelper.getNameHTML(f)).append("</th>");
             
         }
@@ -37,7 +37,7 @@ public class TableBuilder {
         sb.append("<tr>").append(createHeader0(clazz)).append("</tr>");
         return sb.toString();
     }
-    public static String createTable(Vector<Object> lObjects) throws Exception{
+    public static String createTable(Vector<Object> lObjects) throws ReflectiveOperationException{
         StringBuilder sb = new StringBuilder("<table border=\"2\">");
         
         Class<?> clazz=lObjects.get(0).getClass();

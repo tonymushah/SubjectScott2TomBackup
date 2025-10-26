@@ -17,4 +17,16 @@
         <servlet-name>TrServlet</servlet-name>
         <url-pattern>/trUpdate</url-pattern>
     </servlet-mapping>
+
+
+     <servlet>
+        <servlet-name>displaySubject2</servlet-name>
+        <servlet-class>main.frontend.servlet.FindEmpHistoServet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>displaySubject2</servlet-name>
+        <url-pattern>/displaySubject2</url-pattern>
+    </servlet-mapping>
+
 </web-app>

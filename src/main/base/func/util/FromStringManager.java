@@ -43,13 +43,14 @@ public class FromStringManager {
     }
     public static void setFieldFromString(Object e,String name,String value) throws ReflectiveOperationException,FromStringException{
         Class<?> clazz=e.getClass();
-        Field f=clazz.getDeclaredField(name);
+        Field f=ReflectiveManager.getFieldRecursive(clazz,name);
         Object valueObject=fromString(value, f.getType());
         ReflectiveManager.setFieldObject(f, e, valueObject);
     }
+
     public static String getFieldToString(Object e,String name) throws ReflectiveOperationException{
         Class<?> clazz=e.getClass();
-        Field f=clazz.getDeclaredField(name);
+        Field f=ReflectiveManager.getFieldRecursive(clazz,name);
        return ReflectiveManager.getFieldObject(f, e).toString();
     }
 }

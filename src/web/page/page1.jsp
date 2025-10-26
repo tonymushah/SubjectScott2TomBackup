@@ -1,3 +1,5 @@
+<%@ page import="main.map.HISTOSAL"%>
+<%@ page import="main.frontend.display.FormBuilder"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,11 +8,6 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="../trUpdate" method="post">
-        <p>date :<input type="date" name="date"></p>
-        <p>EMP :<input type="number" name="emp"></p>
-        <p>MONTANT :<input type="number" name="montant"></p>
-        <input type="submit" value="valider">
-    </form>    
+    <% out.println(FormBuilder.createForm(HISTOSAL.class,"../trUpdate","")); %>
 </body>
 </html>

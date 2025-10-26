@@ -1,3 +1,6 @@
+<%@ page import="main.map.V_SALAIRE_EMP_PROCHE"%>
+<%@ page import="main.frontend.display.FormBuilder"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,9 +9,8 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="../showRs" method="post">
-        <p>date :<input type="date" name="date"></p>
-        <input type="submit" value="valider">
-    </form>    
+    <% 
+    String otherInputHtml="<p>DATE DE FILTRE <input required type=\"date\" name=\"DATE-REQUIRED\"></p>"+"\n<h1>Condition Supplémentaire</h1>";
+    out.println(FormBuilder.createForm(V_SALAIRE_EMP_PROCHE.class,"../displaySubject2",otherInputHtml)); %>
 </body>
 </html>

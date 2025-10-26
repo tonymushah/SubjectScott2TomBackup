@@ -30,18 +30,27 @@ public class DBClassManager {
         pStatement.close();
     }
 
-    public static Vector<Object> findObject0(Connection conn, Object where, String tableName)
-            throws SQLException, ReflectiveOperationException {
+    public static Vector<Object> RsIntoVector(ResultSet rs, Class<?> clazz) throws ReflectiveOperationException, SQLException {
         Vector<Object> results = new Vector<>();
-        PreparedStatement pStatement = DBQueryManager.getPstmtFind(conn, tableName, where);
-        ResultSet rs = pStatement.executeQuery();
-        Class<?> clazz = where.getClass();
         while (rs.next()) {
             Object map = mapResultSetToObject(rs, clazz);
             results.add(map);
         }
-        pStatement.close();
         return results;
+    }
+
+    public static Vector<Object> findObject0(PreparedStatement pStatement, Object where) throws SQLException, ReflectiveOperationException {
+        ResultSet rs = pStatement.executeQuery();
+        Class<?> clazz = where.getClass();
+        Vector<Object> retour = RsIntoVector(rs, clazz);
+        rs.close();
+        pStatement.close();
+        return retour;
+    }
+    public static Vector<Object> findObject0(Connection conn, Object where, String tableName)
+            throws SQLException, ReflectiveOperationException {
+        PreparedStatement pStatement = DBQueryManager.getPstmtFind(conn, tableName, where);
+        return findObject0(pStatement, where);
     }
 
     public static void DeleteObject0(Connection conn, Object where, String tableName)
@@ -58,7 +67,7 @@ public class DBClassManager {
         int columnCount = metaData.getColumnCount();
         for (int i = 1; i <= columnCount; i++) {
             String columnName = metaData.getColumnName(i).toUpperCase();
-            Field field = clazz.getDeclaredField(columnName);
+            Field field = ReflectiveManager.getFieldRecursive(clazz,columnName);
             handleAppropriateGetField(map, rs, field, i);
         }
         return map;

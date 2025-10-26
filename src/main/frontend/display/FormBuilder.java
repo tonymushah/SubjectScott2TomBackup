@@ -3,13 +3,15 @@ package main.frontend.display;
 import java.lang.reflect.Field;
 import java.sql.Date;
 
+import main.base.func.util.ReflectiveManager;
+
 public class FormBuilder {
     public static String createLabel(Field f, Class<?> parent) {
         StringBuilder sb = new StringBuilder();
         Class<?> type = f.getType();
         sb.append("<p>");
         sb.append("<span>").append(FieldHelper.getNameHTML(f)).append(" </span>");
-        sb.append("<input required ");
+        sb.append("<input ");
         if (FieldHelper.isNumericType(type)) {
             sb.append("type=\"number\"");
         } else if (Date.class.isAssignableFrom(type)) {
@@ -26,18 +28,20 @@ public class FormBuilder {
 
     public static String createFrom0(Class<?> clazz) {
         StringBuilder sb = new StringBuilder();
-        for (Field f : clazz.getDeclaredFields()) {
+        for (Field f : ReflectiveManager.getFieldRecursives(clazz)) {
             sb.append(createLabel(f, clazz));
 
         }
         return sb.toString();
     }
 
-    public static String createFrom(Class<?> clazz) {
-        StringBuilder sb = new StringBuilder("<form method=\"post\" action=\"../serialize\">");
+    public static String createForm(Class<?> clazz, String action,String OtherInputsHtml) {
+        StringBuilder sb = new StringBuilder("<form method=\"post\" ")
+                .append(" action =\"").append(action).append("\">");
+        sb.append("\n"+OtherInputsHtml+"\n");
         sb.append(createFrom0(clazz));
         sb.append("<input type=\"hidden\" name=\"class\" ").append("value=\"").append(clazz.getName()).append("\" >");
-        sb.append("<input type=\"submit\" value=\"Inserer\"");
+        sb.append("<input type=\"submit\" value=\"valider\"");
         sb.append("</from>");
         return sb.toString();
     }
