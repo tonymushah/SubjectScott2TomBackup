@@ -41,7 +41,6 @@ public static void setFieldObject(Field f, Object e, Object value) throws NoSuch
     while (current != null) {
         try {
             Field field = current.getDeclaredField(fieldName);
-           // field.setAccessible(true);
             return field;
         } catch (NoSuchFieldException e) {
             current = current.getSuperclass(); 

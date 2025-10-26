@@ -36,15 +36,15 @@ public class V_SALAIRE_EMP_PROCHE extends EMP {
 
     public static Vector<Object> findEmp(String date, Object where) throws SQLException, ReflectiveOperationException {
         Connection conn = DBconnect.connect();
+        String viewToUse = SpecialQueryBuilder.isGeDateToNow(date) ? "V_SALAIRE_EMP_TODAY" : "V_SALAIRE_EMP_PROCHE";
         Vector<Object> results = DBClassManager.findObject0(
                 SpecialQueryBuilder.getPstmtFor_SALAIRE_EMP(
                         conn, date,
-                        "V_SALAIRE_EMP_PROCHE", where),
+                        viewToUse, where),
                 where.getClass());
         conn.commit();
         conn.close();
         return results;
     }
 
-    
 }

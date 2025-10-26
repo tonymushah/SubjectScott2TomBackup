@@ -13,7 +13,7 @@ public class Test2 {
             // Connexion à la base de données
             Connection conn = DBconnect.connect();
             // Date de test
-            String date = "2025-10-26";
+            String date = "2025-10-31";
 
             // Table/Vue à utiliser
 
@@ -21,7 +21,7 @@ public class Test2 {
             // Objet WHERE de test
 
             V_SALAIRE_EMP_PROCHE where=new V_SALAIRE_EMP_PROCHE();
-           where.setFieldFromString("EMPNO","7902");
+        //   where.setFieldFromString("EMPNO","7902");
             // Appel de la fonctio
           //  PreparedStatement pstmt = SpecialQueryBuilder.getPstmtFor_SALAIRE_EMP(conn, date, tableName, where);
 

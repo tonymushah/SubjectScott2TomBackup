@@ -35,14 +35,15 @@ public class FormBuilder {
         return sb.toString();
     }
 
-    public static String createForm(Class<?> clazz, String action,String OtherInputsHtml) {
-        StringBuilder sb = new StringBuilder("<form method=\"post\" ")
-                .append(" action =\"").append(action).append("\">");
-        sb.append("\n"+OtherInputsHtml+"\n");
-        sb.append(createFrom0(clazz));
-        sb.append("<input type=\"hidden\" name=\"class\" ").append("value=\"").append(clazz.getName()).append("\" >");
-        sb.append("<input type=\"submit\" value=\"valider\"");
-        sb.append("</from>");
-        return sb.toString();
-    }
+    public static String createForm(Class<?> clazz, String action, String OtherInputsHtml) {
+    StringBuilder sb = new StringBuilder("<form method=\"post\" ")
+            .append(" action=\"").append(action).append("\">\n");
+    sb.append(OtherInputsHtml).append("\n");
+    sb.append(createFrom0(clazz));
+    sb.append("<input type=\"hidden\" name=\"class\" ")
+      .append("value=\"").append(clazz.getName()).append("\" >\n");
+    sb.append("<input type=\"submit\" value=\"valider\">\n");  
+    sb.append("</form>\n"); 
+    return sb.toString();
+}
 }
