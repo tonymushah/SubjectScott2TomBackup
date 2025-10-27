@@ -14,7 +14,7 @@ import main.base.context.DBTypes;
 import main.base.func.util.ReflectiveManager;
 
 public class DBClassManager {
-    public static void UpdateObject0(Connection conn, Object updates, Object where)
+    public static void updateObject0(Connection conn, Object updates, Object where)
             throws SQLException, ReflectiveOperationException, NoDataToUpdateErr {
         Class<?> clazz = updates.getClass();
         PreparedStatement pStatement = DBQueryManager.getPstmtUpdate(conn, clazz.getSimpleName(), updates, where);
@@ -22,7 +22,7 @@ public class DBClassManager {
         pStatement.close();
     }
 
-    public static void InsertObject0(Connection conn, Object value)
+    public static void insertObject0(Connection conn, Object value)
             throws SQLException, ReflectiveOperationException, NoDataToUpdateErr {
         Class<?> clazz = value.getClass();
         PreparedStatement pStatement = DBQueryManager.getPstmtInsert(conn, value, clazz.getSimpleName());
@@ -52,7 +52,7 @@ public class DBClassManager {
         return findObject0(pStatement, where.getClass());
     }
 
-    public static void DeleteObject0(Connection conn, Object where, String tableName)
+    public static void deleteObject0(Connection conn, Object where, String tableName)
             throws SQLException, ReflectiveOperationException {
         PreparedStatement pStatement = DBQueryManager.getPstmtDelete(conn, tableName, where);
         pStatement.executeUpdate();
