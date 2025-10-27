@@ -14,8 +14,6 @@ public class TableBuilder {
         for (Field f : ReflectiveManager.getFieldRecursives(clazz)) {
             Object fObject = ReflectiveManager.getFieldObject(f, obj);
             String cellClass = "align-middle";
-            
-            // Appliquer des classes conditionnelles selon le type de données
             if (fObject instanceof Number) {
                 cellClass += " text-end";
             } else if (fObject instanceof Boolean) {
@@ -32,8 +30,6 @@ public class TableBuilder {
     public static String createRow(Class<?> clazz, Object obj, int rowIndex) 
             throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
         StringBuilder sb = new StringBuilder();
-        
-        // Alternance des couleurs de ligne pour meilleure lisibilité
         String rowClass = (rowIndex % 2 == 0) ? "table-primary" : "table-light";
         sb.append("<tr class=\"").append(rowClass).append("\">");
         sb.append(createRow0(clazz, obj, rowIndex));
@@ -46,8 +42,6 @@ public class TableBuilder {
         for (Field f : ReflectiveManager.getFieldRecursives(clazz)) {
             String fieldName = FieldHelper.getNameHTML(f);
             String headerClass = "align-middle bg-dark text-white";
-            
-            // Ajouter des icônes ou indications selon le type de champ
             if (FieldHelper.isNumericType(f.getType())) {
                 headerClass += " text-end";
             } else {
@@ -103,8 +97,6 @@ public class TableBuilder {
     
     public static String createTable(Vector<Object> lObjects, String caption) throws ReflectiveOperationException {
         String table = createTable(lObjects);
-        
-        // Remplacer la balise table pour ajouter une légende
         if (table.contains("<table")) {
             table = table.replaceFirst("<table", 
                 "<table class=\"table table-striped table-hover table-bordered\">" +
@@ -127,20 +119,6 @@ private static String formatCellValue(Object value) {
     }
     
     String stringValue = value.toString();
-    
-
-    if (stringValue.length() > 50) {
-        return "<span title=\"" + escapeHtml(stringValue) + "\">" 
-             + escapeHtml(stringValue.substring(0, 47)) + "...</span>";
-    }
-    return escapeHtml(stringValue);
+    return stringValue;
 }
-    private static String escapeHtml(String text) {
-        if (text == null) return "";
-        return text.replace("&", "&amp;")
-                  .replace("<", "&lt;")
-                  .replace(">", "&gt;")
-                  .replace("\"", "&quot;")
-                  .replace("'", "&#39;");
-    }
 }

@@ -1,5 +1,4 @@
-<%@ page import="main.map.HISTOSAL"%>
-<%@ page import="main.frontend.display.FormBuilder"%>
-<%@ page import="main.frontend.display.BodyBuilder"%>
+<%@ page import="main.frontend.display.helper.PageHelper" %>
     <% 
-    out.println(BodyBuilder.makeDefaultBody(FormBuilder.createForm(HISTOSAL.class,"../trUpdate",""))); %>
+    out.println(PageHelper.getContentForPageOne());
+    %>

@@ -2,7 +2,8 @@ package main.base.annotation;
 import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface IdFieldDropDown {
+public @interface IdDropDown {
     Class<?> classtoJoin();
+    String foreingkey();
     String todisplay();
 }

@@ -3,10 +3,9 @@ package debug;
 import java.sql.SQLException;
 
 import main.base.func.special.SpecialQueryBuilder;
-import main.map.HISTOSAL;
-
+import main.map.EMP;
 public class Test3 {
     public static void main(String[] args) throws NoSuchFieldException,SQLException {
-        SpecialQueryBuilder.getNameDisplay(HISTOSAL.class.getDeclaredField("EMPNO"));
+      SpecialQueryBuilder.getNameSelectable(EMP.class.getDeclaredField("MGR"));
     }
 }

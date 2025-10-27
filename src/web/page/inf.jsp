@@ -1,4 +1,4 @@
 <%@ page import="main.frontend.display.helper.PageHelper" %>
     <% 
-    out.println(PageHelper.getContentForPageTwo());
+    out.println(PageHelper.getContentForInfoPage());
     %>

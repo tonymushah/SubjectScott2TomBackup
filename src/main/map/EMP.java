@@ -1,19 +1,25 @@
 package main.map;
 
 import java.sql.Date;
+import main.base.annotation.IdDropDown;
 import main.base.func.util.trait.SQLMapTable;
 import main.base.func.util.trait.SetableFromString;
 public class EMP implements SQLMapTable,SetableFromString {
-    private Integer EMPNO;      // NOT NULL NUMBER(4)
-    private String ENAME;       // VARCHAR2(10)
-    private String JOB;         // VARCHAR2(9)
-    private Integer MGR;        // NUMBER(4)
-    private Date HIREDATE;      // DATE
-    private Double SAL;         // NUMBER(7,2)
-    private Double COMM;        // NUMBER(7,2)
-    private Integer DEPTNO;     // NOT NULL NUMBER(2)
+    Integer EMPNO;     
+    String ENAME;       
+    String JOB;      
 
-    // Constructeurs
+    @IdDropDown(classtoJoin=EMP.class , foreingkey = "EMPNO" , todisplay = "ENAME") 
+    Integer MGR;       
+    
+    Date HIREDATE;     
+    Double SAL;       
+    Double COMM;       
+    
+    @IdDropDown(classtoJoin=DEPT.class , foreingkey = "DEPTNO" , todisplay = "DNAME") 
+    Integer DEPTNO;     
+
+
     public EMP() {}
     
     public EMP(Integer EMPNO, Integer DEPTNO) {
@@ -21,7 +27,7 @@ public class EMP implements SQLMapTable,SetableFromString {
         this.DEPTNO = DEPTNO;
     }
 
-    // Getters et Setters normaux
+
     public Integer getEMPNO() {
         return EMPNO;
     }
@@ -82,8 +88,6 @@ public class EMP implements SQLMapTable,SetableFromString {
         this.DEPTNO = DEPTNO;
     }
 
-
-    // Méthode toString pour le debug
     @Override
     public String toString() {
         return "EMP{" +
