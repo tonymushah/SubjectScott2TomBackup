@@ -2,12 +2,15 @@ package main.map;
 
 import java.sql.Date;
 
+import main.base.annotation.IdField;
 import main.base.func.util.trait.SQLMapTable;
 import main.base.func.util.trait.SetableFromString;
 
 public class HISTOSAL implements SQLMapTable,SetableFromString{
     Date DATE_SAL;
     Double MONTANT;
+
+    @IdField(classtoJoin=EMP.class , todisplay = "ENAME") 
     Integer EMPNO;
     public HISTOSAL() {
     }

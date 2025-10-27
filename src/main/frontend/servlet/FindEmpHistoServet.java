@@ -61,7 +61,6 @@ public class FindEmpHistoServet extends HttpServlet{
         }
         
         sb.append("<div class=\"action-buttons\">");
-        sb.append("<a href=\"./page/page2.jsp\" class=\"btn btn-primary\">Nouvelle recherche</a>");
         sb.append("</div>");
         sb.append("</div>");
         

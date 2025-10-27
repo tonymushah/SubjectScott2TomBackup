@@ -4,8 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
-
 import main.base.context.DBconnect;
 import main.base.func.sql.DBQueryManager;
 import main.base.func.sql.DBStringManager;
@@ -22,6 +22,9 @@ public class SpecialQueryBuilder {
         }
     }
     }
+    public static HashMap<String,String> getTable(){
+        return null;
+    } 
    public static PreparedStatement getPstmtFor_SALAIRE_EMP(Connection conn, String date, String tableName,Object where) throws SQLException,ReflectiveOperationException{
    LinkedHashMap<String,Object> lh=DBQueryManager.getColumnNotNull(where);
    String s = DBStringManager.getWhereClause(lh);
