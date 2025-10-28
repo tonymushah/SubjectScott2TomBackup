@@ -32,4 +32,12 @@ public class BackEnd {
         conn.commit();
         conn.close();
         }
+
+         public static void insertNewEmp(PrintWriter debuger,EMP newEmp) throws SQLException, ReflectiveOperationException, NoDataToUpdateErr{
+        debuger.println(""+newEmp);
+        Connection conn=DBconnect.connect();
+        newEmp.insertByConn(conn);
+        conn.commit();
+        conn.close();
+        }
 }

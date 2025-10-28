@@ -13,7 +13,12 @@ import main.map.V_SALAIRE_DEPT_PROCHE;
 public class PageHelper {
     public static String getContentForInfoPage() throws SQLException, ReflectiveOperationException, NoDataToUpdateErr {
         Vector<Object> lo = (new EMP()).find();
-        return BodyBuilder.makeDefaultBody(TableBuilder.createTable(lo,"#"));
+        String content=TableBuilder.createTable(lo,"#");
+        return BodyBuilder.makeDefaultBody(content);
+    }
+
+    public static String getContentForInsertPage() throws SQLException, ReflectiveOperationException, NoDataToUpdateErr{
+        return BodyBuilder.makeDefaultBody(FormBuilder.createForm(EMP.class,"../InsertEmp", ""));
     }
 
     public static String getContentForPageOne() {

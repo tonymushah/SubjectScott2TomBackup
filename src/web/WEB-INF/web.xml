@@ -39,4 +39,14 @@
         <url-pattern>/displayByDept</url-pattern>
     </servlet-mapping>
 
+         <servlet>
+        <servlet-name>InsertEmp</servlet-name>
+        <servlet-class>main.frontend.servlet.InsertEmp</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>InsertEmp</servlet-name>
+        <url-pattern>/InsertEmp</url-pattern>
+    </servlet-mapping>
+
 </web-app>

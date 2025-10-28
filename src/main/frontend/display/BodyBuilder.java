@@ -34,6 +34,11 @@ public class BodyBuilder {
                                 <i class="bi bi-info-circle me-1"></i>Informations
                             </a>
                         </li>
+                         <li class="nav-item">
+                            <a class="nav-link" href="http://localhost:8080/SujetScott/page/InsertEmp.jsp">
+                                <i class="bi bi-info-circle me-1"></i>Insertion Emp
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
