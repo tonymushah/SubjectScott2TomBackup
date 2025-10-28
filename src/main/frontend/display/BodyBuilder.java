@@ -21,7 +21,12 @@ public class BodyBuilder {
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="http://localhost:8080/SujetScott/page/page2.jsp">
-                                <i class="bi bi-search me-1"></i>Page de recherche
+                                <i class="bi bi-search me-1"></i>Recherche par employee
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="http://localhost:8080/SujetScott/page/page_dept.jsp">
+                                <i class="bi bi-search me-1"></i>Recherche par departement
                             </a>
                         </li>
                         <li class="nav-item">

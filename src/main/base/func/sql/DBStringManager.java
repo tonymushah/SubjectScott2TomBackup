@@ -17,6 +17,20 @@ public class DBStringManager {
         return sqlBuilder.toString();
     }
 
+   public static String getWhereClauseByTableName(LinkedHashMap<String, Object> nonNullColumns, String tableName) {
+    StringBuilder sqlBuilder = new StringBuilder();
+    boolean first = true;
+    for (String column : nonNullColumns.keySet()) {
+        if (!first) {
+            sqlBuilder.append(" AND ");
+        } else {
+            first = false;
+        }
+        sqlBuilder.append(tableName).append(".").append(column).append(" = ?");
+    }
+    return sqlBuilder.toString();   
+    }
+
     public static String getSetClause(LinkedHashMap<String, Object> updateColumns) {
         StringBuilder sqlBuilder = new StringBuilder();
         boolean first = true;
@@ -30,6 +44,7 @@ public class DBStringManager {
         }
         return sqlBuilder.toString();
     }
+
     public static String getQueryForInsert(LinkedHashMap<String, Object> insertColumns, String tableName) {
         StringBuilder sqlBuilder = new StringBuilder();
         sqlBuilder.append("INSERT INTO ").append(tableName).append(" (");
@@ -53,7 +68,8 @@ public class DBStringManager {
                 .append(")");
         return sqlBuilder.toString();
     }
-    public static String getQueryForFind(LinkedHashMap<String,Object> nonNullColumns,String tableName){
+
+    public static String getQueryForFind(LinkedHashMap<String, Object> nonNullColumns, String tableName) {
         StringBuilder sqlBuilder = new StringBuilder();
         sqlBuilder.append("SELECT * FROM ").append(tableName);
         if (!nonNullColumns.isEmpty()) {
@@ -61,7 +77,9 @@ public class DBStringManager {
         }
         return sqlBuilder.toString();
     }
-    public static String getQueryForUpdate(LinkedHashMap<String, Object> updateColumns,LinkedHashMap<String, Object> whereColumns,String tableName){
+
+    public static String getQueryForUpdate(LinkedHashMap<String, Object> updateColumns,
+            LinkedHashMap<String, Object> whereColumns, String tableName) {
         StringBuilder sqlBuilder = new StringBuilder();
         sqlBuilder.append("UPDATE ").append(tableName).append(" SET ");
         sqlBuilder.append(DBStringManager.getSetClause(updateColumns));
@@ -70,8 +88,9 @@ public class DBStringManager {
         }
         return sqlBuilder.toString();
     }
-    public static String getQueryForDelete(LinkedHashMap<String,Object> nonNullColumns,String tableName){
-         StringBuilder sqlBuilder = new StringBuilder();
+
+    public static String getQueryForDelete(LinkedHashMap<String, Object> nonNullColumns, String tableName) {
+        StringBuilder sqlBuilder = new StringBuilder();
         sqlBuilder.append("DELETE FROM ").append(tableName);
         if (!nonNullColumns.isEmpty()) {
             sqlBuilder.append(" WHERE ").append(DBStringManager.getWhereClause(nonNullColumns));

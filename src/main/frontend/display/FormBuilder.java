@@ -126,7 +126,7 @@ public class FormBuilder {
         sb.append("<div class=\"d-grid gap-3 mt-5\">");
         sb.append("<button type=\"submit\" class=\"btn btn-success btn-lg py-3 fw-bold rounded-3 border-0 shadow-sm\">");
         sb.append("<i class=\"bi bi-check-circle-fill me-2\"></i>");
-        sb.append("Valider l'enregistrement");
+        sb.append("Valider");
         sb.append("</button>");
         sb.append("</div>");
 

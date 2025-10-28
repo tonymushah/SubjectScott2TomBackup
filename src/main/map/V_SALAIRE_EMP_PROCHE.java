@@ -4,14 +4,34 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Vector;
-
 import main.base.context.DBconnect;
 import main.base.func.special.SpecialQueryBuilder;
 import main.base.func.sql.DBClassManager;
+import main.base.func.util.trait.SetableFromString;
 
-public class V_SALAIRE_EMP_PROCHE extends EMP {
+
+public class V_SALAIRE_EMP_PROCHE  implements SetableFromString  {
+
     public V_SALAIRE_EMP_PROCHE() {
 
+    }
+    
+    Integer EMPNO;
+    public Integer getEMPNO() {
+        return EMPNO;
+    }
+
+    public void setEMPNO(Integer eMPNO) {
+        EMPNO = eMPNO;
+    }
+
+    String ENAME;
+    public String getENAME() {
+        return ENAME;
+    }
+
+    public void setENAME(String eNAME) {
+        ENAME = eNAME;
     }
 
     Date DATE_SAL;
@@ -24,27 +44,26 @@ public class V_SALAIRE_EMP_PROCHE extends EMP {
         DATE_SAL = dATE_SAL;
     }
 
-    Double ANCIEN_MONTANT;
+    Double SALAIRE_A_PAYER;
 
-    public Double getANCIEN_MONTANT() {
-        return ANCIEN_MONTANT;
+    public Double getSALAIRE_A_PAYER() {
+        return SALAIRE_A_PAYER;
     }
 
-    public void setANCIEN_MONTANT(Double aNCIEN_MONTANT) {
-        ANCIEN_MONTANT = aNCIEN_MONTANT;
+    public void setSALAIRE_A_PAYER(Double sALAIRE_A_PAYER) {
+        SALAIRE_A_PAYER = sALAIRE_A_PAYER;
     }
 
-    public static Vector<Object> findEmp(String date, Object where) throws SQLException, ReflectiveOperationException {
+    public static Vector<Object> findEmp(String date, EMP where) throws SQLException, ReflectiveOperationException {
         Connection conn = DBconnect.connect();
         String viewToUse = SpecialQueryBuilder.isGeDateToNow(date) ? "V_SALAIRE_EMP_TODAY" : "V_SALAIRE_EMP_PROCHE";
+        System.out.println(""+viewToUse);
         Vector<Object> results = DBClassManager.findObject0(
                 SpecialQueryBuilder.getPstmtFor_SALAIRE_EMP(
                         conn, date,
                         viewToUse, where),
-                where.getClass());
-        conn.commit();
+                V_SALAIRE_EMP_PROCHE.class);
         conn.close();
         return results;
     }
-
 }

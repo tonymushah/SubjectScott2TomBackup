@@ -1,6 +1,9 @@
 package debug;
 import main.base.Err.FromStringException;
 import main.base.Err.NoDataToUpdateErr;
+import main.map.EMP;
+import main.map.V_SALAIRE_EMP_PROCHE;
+
 //import main.base.context.DBconnect;
 import java.sql.*;
 public class MainTest {
@@ -21,14 +24,11 @@ public class MainTest {
       // newEmp.setFieldFromString("EMPNO","1");
       // newEmp.setFieldFromString("HIREDATE","2026-10-25");
       // // System.out.println(""+newEmp);
-      // //  Connection conn = DBconnect.connect();
       // //  newEmp.insertByConn(conn);
-      // //  for (Object o : newEmp.find(conn)) {
-      // //  System.out.println(""+o.toString());
-      // //  } 
-      // //  newEmp.deleteByConn(conn);
-      // //  conn.commit();
-      // System.out.println(""+newEmp.getFieldToString("EMPNO"));
-
+      EMP p=new EMP();
+      p.setDEPTNO(40);
+      for (Object o : V_SALAIRE_EMP_PROCHE.findEmp("2026-10-25", p)) {
+          System.out.println(""+((V_SALAIRE_EMP_PROCHE)o).getEMPNO());
+      };
     }
   }

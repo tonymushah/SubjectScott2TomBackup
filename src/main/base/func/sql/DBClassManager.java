@@ -52,6 +52,12 @@ public class DBClassManager {
         return findObject0(pStatement, where.getClass());
     }
 
+    public static Vector<Object> findObjectByRetour(Connection conn, Object where, Class<?> retour, String tableName)
+            throws SQLException, ReflectiveOperationException {
+        PreparedStatement pStatement = DBQueryManager.getPstmtFind(conn, tableName, where);
+        return findObject0(pStatement, retour );
+    }
+
     public static void deleteObject0(Connection conn, Object where, String tableName)
             throws SQLException, ReflectiveOperationException {
         PreparedStatement pStatement = DBQueryManager.getPstmtDelete(conn, tableName, where);
