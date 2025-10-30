@@ -8,6 +8,7 @@ import main.frontend.display.BodyBuilder;
 import main.frontend.display.FormBuilder;
 import main.frontend.display.TableBuilder;
 import main.map.EMP;
+import main.map.HISTOSAL;
 import main.map.V_SALAIRE_DEPT_PROCHE;
 public class PageHelper {
     public static String getContentForInfoPage() throws SQLException, ReflectiveOperationException, NoDataToUpdateErr {
@@ -17,24 +18,24 @@ public class PageHelper {
     }
 
     public static String getContentForInsertPage() throws SQLException, ReflectiveOperationException, NoDataToUpdateErr{
-        return BodyBuilder.makeDefaultBody(FormBuilder.createForm(EMP.class,"../InsertEmp", ""));
+        return BodyBuilder.makeDefaultBody(FormBuilder.createForm(EMP.class,"../InsertEmp", "",false));
     }
 
     public static String getContentForPageOne() {
-        return BodyBuilder.makeDefaultBody(FormBuilder.createForm(EMP.class, "../trUpdate", "<input required type=\"date\" name=\"DATE_SAL\">"));
+        Class<?>[] classes={HISTOSAL.class,EMP.class};
+        boolean[] skipmodes={false,true};
+        return BodyBuilder.makeDefaultBody(FormBuilder.createForm(classes, "../trUpdate", "", skipmodes));
     }
 
     public static String getContentForPageTwo() {
-        String otherInputHtml = "<p>DATE DE FILTRE <input required type=\"date\" name=\"DATE-REQUIRED\"></p>"
-                + "\n<h1>Autre condition </h1>";
-        String form = FormBuilder.createForm(EMP.class, "../displaySubject2", otherInputHtml);
+        String otherInputHtml = "<p>DATE DE FILTRE <input required type=\"date\" name=\"DATE-REQUIRED\"></p>";
+        String form = FormBuilder.createForm(EMP.class, "../displaySubject2", otherInputHtml,false);
         return BodyBuilder.makeDefaultBody(form);
     }
 
     public static String getContentForPage_dept() {
-        String otherInputHtml = "<p>DATE DE FILTRE <input required type=\"date\" name=\"DATE-REQUIRED\"></p>"
-                + "\n<h1>Autre condition </h1>";
-        String form = FormBuilder.createForm(V_SALAIRE_DEPT_PROCHE.class, "../displayByDept", otherInputHtml);
+        String otherInputHtml = "<p>DATE DE FILTRE <input required type=\"date\" name=\"DATE-REQUIRED\"></p>";
+        String form = FormBuilder.createForm(V_SALAIRE_DEPT_PROCHE.class, "../displayByDept", otherInputHtml,false);
         return BodyBuilder.makeDefaultBody(form);
     }
 }

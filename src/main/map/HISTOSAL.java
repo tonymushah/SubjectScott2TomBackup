@@ -1,6 +1,4 @@
 package main.map;
-
-import java.lang.classfile.instruction.ThrowInstruction;
 import java.sql.Date;
 
 import main.backend.base.annotation.IdDropDown;

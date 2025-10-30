@@ -9,7 +9,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import main.backend.Metier;
-import main.backend.base.Err.NoDataToUpdateErr;
 
 public class InsertSalaireServlet extends HttpServlet{
     @Override
@@ -19,7 +18,7 @@ public class InsertSalaireServlet extends HttpServlet{
     Map<String, String[]> allParameters = req.getParameterMap();
     try {
         Metier.insertNewHisto(out,allParameters);
-    } catch (SQLException | ReflectiveOperationException | NoDataToUpdateErr e) {
+    } catch (SQLException | ReflectiveOperationException e) {
         e.printStackTrace(out);
     }
    }

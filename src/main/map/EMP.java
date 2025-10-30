@@ -3,9 +3,11 @@ package main.map;
 import java.sql.Date;
 
 import main.backend.base.annotation.IdDropDown;
+import main.backend.base.annotation.SkipFormulaire;
 import main.backend.base.func.util.trait.SQLMapTable;
 import main.backend.base.func.util.trait.SetableFromString;
 public class EMP implements SQLMapTable,SetableFromString {
+    @SkipFormulaire
     Integer EMPNO;     
     String ENAME;       
     String JOB;      
@@ -13,7 +15,10 @@ public class EMP implements SQLMapTable,SetableFromString {
     @IdDropDown(classtoJoin=EMP.class , foreingkey = "EMPNO" , todisplay = "ENAME") 
     Integer MGR;       
     
-    Date HIREDATE;     
+    @SkipFormulaire
+    Date HIREDATE;
+
+    @SkipFormulaire     
     Double SAL;       
     Double COMM;       
     
@@ -27,7 +32,11 @@ public class EMP implements SQLMapTable,SetableFromString {
         this.EMPNO = EMPNO;
         this.DEPTNO = DEPTNO;
     }
-
+    public static EMP fromEMPNO(Integer EMPNO){
+        EMP a=new EMP();
+        a.setEMPNO(EMPNO);
+        return a;
+    }
 
     public Integer getEMPNO() {
         return EMPNO;

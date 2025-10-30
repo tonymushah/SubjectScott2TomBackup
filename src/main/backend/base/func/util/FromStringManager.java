@@ -8,16 +8,18 @@ import java.time.format.DateTimeFormatter;
 import main.backend.base.Err.FromStringException;
 
 public class FromStringManager {
-    public static String getNaiveNameField(String fieldWithDelcaringClass){
-     return fieldWithDelcaringClass.substring(fieldWithDelcaringClass.lastIndexOf('.') + 1);
+    public static String getNaiveNameField(String fieldWithDelcaringClass) {
+        return fieldWithDelcaringClass.substring(fieldWithDelcaringClass.lastIndexOf('.') + 1);
     }
-    public static Date parseDate(String value){
+
+    public static Date parseDate(String value) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate localDate = LocalDate.parse(value, formatter);
         return Date.valueOf(localDate);
     }
-    public static Object fromString(String value,Class<?> clazz) throws FromStringException{
-         if (value == null)
+
+    public static Object fromString(String value, Class<?> clazz) throws FromStringException {
+        if (value == null)
             return null;
 
         try {
@@ -33,7 +35,7 @@ public class FromStringManager {
                 return Boolean.parseBoolean(value);
             } else if (clazz == char.class || clazz == Character.class) {
                 return value.length() > 0 ? value.charAt(0) : '\0';
-            }else if (clazz == String.class) {
+            } else if (clazz == String.class) {
                 return value;
             } else if (clazz == Date.class) {
                 return parseDate(value);
@@ -44,16 +46,26 @@ public class FromStringManager {
             throw new FromStringException(clazz, e);
         }
     }
-    public static void setFieldFromString(Object e,String name,String value) throws ReflectiveOperationException,FromStringException{
-        Class<?> clazz=e.getClass();
-        Field f=ReflectiveManager.getFieldRecursive(clazz,getNaiveNameField(name));
-        Object valueObject=fromString(value, f.getType());
+
+    public static void setFieldFromString(Object e, String name, String value)
+            throws ReflectiveOperationException, FromStringException {
+        Class<?> clazz = e.getClass();
+        Field f = ReflectiveManager.getFieldRecursive(clazz, getNaiveNameField(name));
+        Object valueObject = fromString(value, f.getType());
         ReflectiveManager.setFieldObject(f, e, valueObject);
     }
 
-    public static String getFieldToString(Object e,String name) throws ReflectiveOperationException{
-        Class<?> clazz=e.getClass();
-        Field f=ReflectiveManager.getFieldRecursive(clazz,getNaiveNameField(name));
-       return ReflectiveManager.getFieldObject(f, e).toString();
+    public static String getFieldToString(Object e, String name) throws ReflectiveOperationException {
+        Class<?> clazz = e.getClass();
+        Field f = ReflectiveManager.getFieldRecursive(clazz, getNaiveNameField(name));
+        Object field = ReflectiveManager.getFieldObject(f, e);
+        if (f.getType() == Date.class) {
+            LocalDate localDate = ((Date)(field)).toLocalDate(); 
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            return localDate.format(formatter);
+        } else {
+            return field.toString();
+        }
+
     }
 }
