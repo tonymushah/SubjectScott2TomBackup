@@ -10,10 +10,10 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import main.common.map.V_SALAIRE_EMP_PROCHE;
 import main.frontend.display.BodyBuilder;
 import main.frontend.display.TableBuilder;
 import main.frontend.servlet.helper.ServletHelper;
-import main.map.V_SALAIRE_EMP_PROCHE;
 
 public class TestServlet extends HttpServlet{
      @Override

@@ -2,7 +2,7 @@ package debug;
 
 import java.sql.SQLException;
 
-import main.map.V_SALAIRE_DEPT_PROCHE;
+import main.common.map.V_SALAIRE_DEPT_PROCHE;
 
 public class TestDept {
     public static void main(String[] args) throws SQLException, ReflectiveOperationException {

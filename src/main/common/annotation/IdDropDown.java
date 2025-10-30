@@ -1,4 +1,4 @@
-package main.backend.base.annotation;
+package main.common.annotation;
 import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)

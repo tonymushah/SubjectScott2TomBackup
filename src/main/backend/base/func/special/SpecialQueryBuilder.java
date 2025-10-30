@@ -8,12 +8,12 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-import main.backend.base.annotation.IdDropDown;
 import main.backend.base.context.DBconnect;
 import main.backend.base.func.sql.DBQueryManager;
 import main.backend.base.func.sql.DBStringManager;
 import main.backend.base.func.util.FromStringManager;
-import main.map.V_SALAIRE_DEPT_PROCHE;
+import main.common.annotation.IdDropDown;
+import main.common.map.V_SALAIRE_DEPT_PROCHE;
 
 public class SpecialQueryBuilder {
     public static boolean isGeDateToNow(String dateString) throws SQLException {

@@ -6,10 +6,10 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-import main.backend.base.annotation.IdDropDown;
-import main.backend.base.annotation.SkipFormulaire;
 import main.backend.base.func.special.SpecialQueryBuilder;
 import main.backend.base.func.util.ReflectiveManager;
+import main.common.annotation.IdDropDown;
+import main.common.annotation.SkipFormulaire;
 
 public class FormBuilder {
     public static String getdropdown(Field f) {

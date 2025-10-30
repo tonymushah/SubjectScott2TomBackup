@@ -7,8 +7,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import main.backend.Metier;
+import main.common.map.EMP;
 import main.frontend.servlet.helper.ServletHelper;
-import main.map.EMP;
 
 public class InsertEmp extends HttpServlet {
     @Override

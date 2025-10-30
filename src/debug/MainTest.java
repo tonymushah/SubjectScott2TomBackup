@@ -1,8 +1,8 @@
 package debug;
 import main.backend.base.Err.FromStringException;
 import main.backend.base.Err.NoDataToUpdateErr;
-import main.map.EMP;
-import main.map.V_SALAIRE_EMP_PROCHE;
+import main.common.map.EMP;
+import main.common.map.V_SALAIRE_EMP_PROCHE;
 
 //import main.base.context.DBconnect;
 import java.sql.*;

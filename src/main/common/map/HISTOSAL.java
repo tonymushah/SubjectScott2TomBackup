@@ -1,9 +1,9 @@
-package main.map;
+package main.common.map;
 import java.sql.Date;
 
-import main.backend.base.annotation.IdDropDown;
 import main.backend.base.func.util.trait.SQLMapTable;
 import main.backend.base.func.util.trait.SetableFromString;
+import main.common.annotation.IdDropDown;
 
 public class HISTOSAL implements SQLMapTable,SetableFromString{
     Date DATE_SAL;

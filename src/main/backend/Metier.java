@@ -10,8 +10,8 @@ import java.util.Vector;
 import main.backend.base.Err.NoDataToUpdateErr;
 import main.backend.base.context.DBconnect;
 import main.backend.base.func.sql.DBQueryManager;
-import main.map.EMP;
-import main.map.HISTOSAL;
+import main.common.map.EMP;
+import main.common.map.HISTOSAL;
 
 public class Metier {
         public static boolean isValidToFind(Object e) {

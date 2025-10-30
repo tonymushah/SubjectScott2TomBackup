@@ -1,14 +1,14 @@
-package main.map;
+package main.common.map;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import main.backend.base.annotation.IdDropDown;
 import main.backend.base.context.DBconnect;
 import main.backend.base.func.special.SpecialQueryBuilder;
 import main.backend.base.func.sql.DBClassManager;
 import main.backend.base.func.util.trait.SetableFromString;
+import main.common.annotation.IdDropDown;
 
 public class V_SALAIRE_DEPT_PROCHE implements SetableFromString {
     @IdDropDown(classtoJoin=DEPT.class , foreingkey = "DEPTNO" , todisplay = "DNAME") 

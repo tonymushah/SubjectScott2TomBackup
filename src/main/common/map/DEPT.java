@@ -1,4 +1,4 @@
-package main.map;
+package main.common.map;
 
 import main.backend.base.func.util.trait.SQLMapTable;
 import main.backend.base.func.util.trait.SetableFromString;

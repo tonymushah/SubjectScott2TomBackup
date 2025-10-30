@@ -1,4 +1,4 @@
-package main.map;
+package main.common.map;
 
 import java.sql.Connection;
 import java.sql.Date;

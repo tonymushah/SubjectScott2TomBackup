@@ -1,4 +1,4 @@
-package main.backend.base.annotation;
+package main.common.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
