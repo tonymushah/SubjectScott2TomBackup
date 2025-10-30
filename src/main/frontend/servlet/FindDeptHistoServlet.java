@@ -24,11 +24,11 @@ public class FindDeptHistoServlet extends HttpServlet {
         ServletHelper.FillSetable(req.getParameterMap(), where);
         try {
             Vector<Object> lo = V_SALAIRE_DEPT_PROCHE.findDept(date,where);
-            String content = ServletHelper.generateContent(date, where , lo);
+            String content = ServletHelper.generateContentSearch(where, lo,"#");
             out.println(BodyBuilder.makeDefaultBody(content));
             
         } catch (ReflectiveOperationException | SQLException e) {
-            String errorContent = ServletHelper.generateErrorContent(date, where, e);
+            String errorContent = ServletHelper.generateErrorContentSearch(date, where, e);
             out.println(BodyBuilder.makeDefaultBody(errorContent));
         } 
     }

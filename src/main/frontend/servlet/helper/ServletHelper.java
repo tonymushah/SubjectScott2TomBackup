@@ -20,14 +20,13 @@ public class ServletHelper {
         }
     }
     }
-      public static  String generateContent(String date, Object where, Vector<Object> results) throws ReflectiveOperationException {
+      public static  String generateContentSearch(Object where ,Vector<Object> results,String hrefForRow) throws ReflectiveOperationException {
         StringBuilder sb = new StringBuilder();
         
         sb.append("<div class=\"search-results\">");
         sb.append("<h2>Résultats de la recherche</h2>");
         sb.append("<div class=\"search-info\">");
-        sb.append("<p><strong>Date de référence:</strong> ").append(date).append("</p>");
-        sb.append("<p><strong>Filtres appliqués:</strong> ").append(where.toString()).append("</p>");
+        sb.append("<p><strong>Filtres appliqués:</strong> ").append(where.toString()).append("</p>"); 
         sb.append("</div>");
         
         if (results.isEmpty()) {
@@ -40,7 +39,7 @@ public class ServletHelper {
             sb.append("<p><strong>").append(results.size()).append(" résultat(s) trouvé(s)</strong></p>");
             sb.append("</div>");
             sb.append("<div class=\"table-container\">");
-            sb.append(TableBuilder.createTable(results,"./MaServlet"));
+            sb.append(TableBuilder.createTable(results,hrefForRow));
             sb.append("</div>");
         }
         
@@ -51,7 +50,7 @@ public class ServletHelper {
         return sb.toString();
     }
     
-    public static  String generateErrorContent(String date, Object where, Exception e) {
+    public static  String generateErrorContentSearch(String date, Object where, Exception e) {
         StringBuilder sb = new StringBuilder();
         
         sb.append("<div class=\"error-container\">");

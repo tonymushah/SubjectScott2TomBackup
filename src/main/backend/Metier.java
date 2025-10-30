@@ -1,6 +1,7 @@
 package main.backend;
 
 import java.io.PrintWriter;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Map;
@@ -8,29 +9,46 @@ import java.util.Vector;
 
 import main.backend.base.Err.NoDataToUpdateErr;
 import main.backend.base.context.DBconnect;
+import main.backend.base.func.sql.DBQueryManager;
 import main.map.EMP;
 import main.map.HISTOSAL;
 
 public class Metier {
-        public static void updateSal( PrintWriter debuger,HISTOSAL newHisto,Connection conn ) throws SQLException, ReflectiveOperationException, NoDataToUpdateErr{
-        EMP empwhere=new EMP();
-        EMP empvalues=new EMP();
-        empwhere.setEMPNO(newHisto.getEMPNO());
-        empvalues.setSAL(newHisto.getMONTANT());
-
-        Double empLastMontant=((EMP ) empwhere.findByConn(conn).elementAt(0)).getSAL();
-        debuger.println(""+empvalues);
-        debuger.println(""+empwhere);
-        debuger.println(""+empLastMontant);
-
-        debuger.println("Update EMP"+newHisto);
-        empvalues.updateByConn(conn, empwhere);
-
-        debuger.println("INSERT MONTANT "+empLastMontant);
-        
-        newHisto.setMONTANT(empLastMontant);
-        newHisto.insertByConn(conn);
+        public static boolean isValidToFind(Object e) {
+                boolean maybe_retour = false;
+                try {
+                        maybe_retour = DBQueryManager.getColumnNotNull(e).size() > 0;
+                } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e1) {
+                }
+                return maybe_retour;
         }
+
+        public static void updateSal(PrintWriter debuger, HISTOSAL newHisto, Connection conn)
+                        throws SQLException, ReflectiveOperationException, NoDataToUpdateErr {
+                EMP empwhere = new EMP();
+                EMP empvalues = new EMP();
+                empwhere.setEMPNO(newHisto.getEMPNO());
+                empvalues.setSAL(newHisto.getMONTANT());
+                Double empLastMontant = ((EMP) empwhere.findByConn(conn).elementAt(0)).getSAL();
+                empvalues.updateByConn(conn, empwhere);
+                newHisto.setMONTANT(empLastMontant);
+                newHisto.insertByConn(conn);
+        }
+
+        public static void updateSal_Emp(EMP emp, HISTOSAL histo, Connection conn,
+                        PrintWriter debuger) throws SQLException, ReflectiveOperationException, NoDataToUpdateErr {
+                EMP whereEmp = EMP.fromEMPNO(emp.getEMPNO());
+                Vector<Object> lemp = whereEmp.find();
+                if (!(((EMP) lemp.get(0)).getSAL() == histo.getMONTANT()) && isValidToFind(histo)) {
+                        try {
+                                updateSal(debuger, histo, conn);
+                        } catch (Exception e) {
+                                debuger.println("" + e);
+                        }
+                }
+                emp.updateByConn(conn, whereEmp);
+        }
+
         public static void insertNewHisto(PrintWriter debuger, Map<String, String[]> allParameters)
                         throws SQLException, ReflectiveOperationException {
 
@@ -42,16 +60,11 @@ public class Metier {
                 HISTOSAL histo = new HISTOSAL();
                 histo.fillSetable(allParameters);
 
-                EMP where = EMP.fromEMPNO(emp.getEMPNO());
-                Vector<Object> lemp = where.find();
-
                 try {
-                        if (! (((EMP) lemp.get(0)).getSAL() == histo.getMONTANT())) {
-                                updateSal(debuger , histo , conn);
-                        }
-                        emp.updateByConn(conn, where);
+                        updateSal_Emp(emp, histo, conn, debuger);
                 } catch (NoDataToUpdateErr e) {
-
+                        debuger.println("" + emp);
+                        debuger.println("" + e);
                 }
                 conn.commit();
                 conn.close();

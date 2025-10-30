@@ -115,7 +115,7 @@ public class TableBuilder {
     public static String createHeader0(Class<?> clazz) {
         StringBuilder sb = new StringBuilder();
         for (Field f : ReflectiveManager.getFieldRecursives(clazz)) {
-            String fieldName = FieldHelper.getNameHTML(f);
+            String fieldName = f.getName() ;
             String headerClass = "align-middle bg-dark text-white";
             if (FieldHelper.isNumericType(f.getType())) {
                 headerClass += " text-end";

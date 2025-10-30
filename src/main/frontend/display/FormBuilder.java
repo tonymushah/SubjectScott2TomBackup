@@ -63,7 +63,7 @@ public class FormBuilder {
 
         sb.append("<div class=\"mb-4\">");
         sb.append("<label class=\"form-label fw-bold text-gradient mb-3 d-flex align-items-center\">")
-                .append("<i class=\"bi bi-tag-fill me-2\"></i>" + FieldHelper.getNameHTML(f)).append("</label>");
+                .append("<i class=\"bi bi-tag-fill me-2\"></i>" + f.getName() ).append("</label>");
 
         if (f.isAnnotationPresent(IdDropDown.class)) {
             sb.append(getdropdown(f));
