@@ -1,4 +1,4 @@
-package main.base.Err;
+package main.backend.base.Err;
 
 public class NoDataToUpdateErr extends Exception{
     public NoDataToUpdateErr(String message){

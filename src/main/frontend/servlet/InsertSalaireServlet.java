@@ -8,21 +8,21 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import main.backend.BackEnd;
-import main.base.Err.NoDataToUpdateErr;
+import main.backend.Metier;
+import main.backend.base.Err.NoDataToUpdateErr;
 import main.frontend.servlet.helper.ServletHelper;
-import main.map.HISTOSAL;
+import main.map.EMP;
 
 public class InsertSalaireServlet extends HttpServlet{
     @Override
    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     PrintWriter out=resp.getWriter();
     resp.setContentType("text/plain");
-    HISTOSAL newHisto=new HISTOSAL();
+    EMP newHisto=new EMP();
     Map<String, String[]> allParameters = req.getParameterMap();
     ServletHelper.FillSetable(allParameters, newHisto);
     try {
-        BackEnd.insertNewHisto(out,newHisto);
+        Metier.insertNewHisto(out,newHisto,req.getParameter("DATE_SAL"));
     } catch (SQLException | ReflectiveOperationException | NoDataToUpdateErr e) {
         e.printStackTrace(out);
     }

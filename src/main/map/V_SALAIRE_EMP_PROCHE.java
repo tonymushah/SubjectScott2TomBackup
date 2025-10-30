@@ -4,13 +4,15 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Vector;
-import main.base.context.DBconnect;
-import main.base.func.special.SpecialQueryBuilder;
-import main.base.func.sql.DBClassManager;
-import main.base.func.util.trait.SetableFromString;
+
+import main.backend.base.context.DBconnect;
+import main.backend.base.func.special.SpecialQueryBuilder;
+import main.backend.base.func.sql.DBClassManager;
+import main.backend.base.func.util.trait.SQLMap;
+import main.backend.base.func.util.trait.SetableFromString;
 
 
-public class V_SALAIRE_EMP_PROCHE  implements SetableFromString  {
+public class V_SALAIRE_EMP_PROCHE  implements SetableFromString,SQLMap  {
 
     public V_SALAIRE_EMP_PROCHE() {
 

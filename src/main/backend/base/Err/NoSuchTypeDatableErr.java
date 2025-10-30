@@ -1,4 +1,4 @@
-package main.base.Err;
+package main.backend.base.Err;
 
 public class NoSuchTypeDatableErr extends Exception {
     public NoSuchTypeDatableErr(String message){

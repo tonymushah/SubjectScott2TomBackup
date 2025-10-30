@@ -1,6 +1,6 @@
 package debug;
-import main.base.Err.FromStringException;
-import main.base.Err.NoDataToUpdateErr;
+import main.backend.base.Err.FromStringException;
+import main.backend.base.Err.NoDataToUpdateErr;
 import main.map.EMP;
 import main.map.V_SALAIRE_EMP_PROCHE;
 

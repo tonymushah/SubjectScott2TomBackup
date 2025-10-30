@@ -1,7 +1,7 @@
 package main.map;
 
-import main.base.func.util.trait.SQLMapTable;
-import main.base.func.util.trait.SetableFromString;
+import main.backend.base.func.util.trait.SQLMapTable;
+import main.backend.base.func.util.trait.SetableFromString;
 
 public class DEPT implements SQLMapTable,SetableFromString {
     Integer DEPTNO;

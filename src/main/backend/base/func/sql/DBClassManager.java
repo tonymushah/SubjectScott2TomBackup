@@ -1,4 +1,4 @@
-package main.base.func.sql;
+package main.backend.base.func.sql;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -9,9 +9,9 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import main.base.Err.NoDataToUpdateErr;
-import main.base.context.DBTypes;
-import main.base.func.util.ReflectiveManager;
+import main.backend.base.Err.NoDataToUpdateErr;
+import main.backend.base.context.DBTypes;
+import main.backend.base.func.util.ReflectiveManager;
 
 public class DBClassManager {
     public static void updateObject0(Connection conn, Object updates, Object where)

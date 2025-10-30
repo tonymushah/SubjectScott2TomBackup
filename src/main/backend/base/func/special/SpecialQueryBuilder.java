@@ -1,4 +1,4 @@
-package main.base.func.special;
+package main.backend.base.func.special;
 
 import java.lang.reflect.Field;
 import java.sql.Connection;
@@ -7,11 +7,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import main.base.annotation.IdDropDown;
-import main.base.context.DBconnect;
-import main.base.func.sql.DBQueryManager;
-import main.base.func.sql.DBStringManager;
-import main.base.func.util.FromStringManager;
+
+import main.backend.base.annotation.IdDropDown;
+import main.backend.base.context.DBconnect;
+import main.backend.base.func.sql.DBQueryManager;
+import main.backend.base.func.sql.DBStringManager;
+import main.backend.base.func.util.FromStringManager;
 import main.map.V_SALAIRE_DEPT_PROCHE;
 
 public class SpecialQueryBuilder {

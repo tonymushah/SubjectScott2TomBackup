@@ -3,8 +3,8 @@ package main.frontend.servlet.helper;
 import java.util.Map;
 import java.util.Vector;
 
-import main.base.Err.FromStringException;
-import main.base.func.util.trait.SetableFromString;
+import main.backend.base.Err.FromStringException;
+import main.backend.base.func.util.trait.SetableFromString;
 import main.frontend.display.TableBuilder;
 
 public class ServletHelper {

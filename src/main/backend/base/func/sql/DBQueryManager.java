@@ -1,4 +1,4 @@
-package main.base.func.sql;
+package main.backend.base.func.sql;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -7,8 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.LinkedHashMap;
 
-import main.base.Err.NoDataToUpdateErr;
-import main.base.func.util.ReflectiveManager;
+import main.backend.base.Err.NoDataToUpdateErr;
+import main.backend.base.func.util.ReflectiveManager;
 
 public class DBQueryManager {
     public static LinkedHashMap<String, Object> getColumnNotNull(Object eObject) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException

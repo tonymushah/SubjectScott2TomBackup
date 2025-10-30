@@ -4,7 +4,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Vector;
 
-import main.base.func.util.ReflectiveManager;
+import main.backend.base.func.util.ReflectiveManager;
 
 public class TableBuilder {
 
@@ -28,7 +28,7 @@ public class TableBuilder {
     private static String buildUrlParams(Class<?> clazz, Object obj) {
         StringBuilder urlParams = new StringBuilder();
 
-        if (!(obj instanceof main.base.func.util.trait.SetableFromString)) {
+        if (!(obj instanceof main.backend.base.func.util.trait.SetableFromString)) {
             return urlParams.toString();
         }
 
@@ -36,7 +36,7 @@ public class TableBuilder {
             String fieldValue = null;
 
             try {
-                fieldValue = ((main.base.func.util.trait.SetableFromString) obj)
+                fieldValue = ((main.backend.base.func.util.trait.SetableFromString) obj)
                         .getFieldToString(f.getName());
             } catch (Exception e) {
                 continue;

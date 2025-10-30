@@ -6,7 +6,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import main.backend.BackEnd;
+import main.backend.Metier;
 import main.frontend.servlet.helper.ServletHelper;
 import main.map.EMP;
 
@@ -18,7 +18,7 @@ public class InsertEmp extends HttpServlet {
         EMP where = new EMP();
         ServletHelper.FillSetable(req.getParameterMap(), where);
         try {
-            BackEnd.insertNewEmp(out, where);
+            Metier.insertNewEmp(out, where);
             resp.sendRedirect("./page/inf.jsp");
         } catch (Exception e) {
             out.println("Error : "+e.getMessage());;

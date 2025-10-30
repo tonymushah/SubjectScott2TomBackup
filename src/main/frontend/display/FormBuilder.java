@@ -5,10 +5,11 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
-import main.base.annotation.IdDropDown;
-import main.base.annotation.SkipFormulaire;
-import main.base.func.special.SpecialQueryBuilder;
-import main.base.func.util.ReflectiveManager;
+
+import main.backend.base.annotation.IdDropDown;
+import main.backend.base.annotation.SkipFormulaire;
+import main.backend.base.func.special.SpecialQueryBuilder;
+import main.backend.base.func.util.ReflectiveManager;
 
 public class FormBuilder {
     
@@ -108,7 +109,7 @@ public class FormBuilder {
         sb.append("<div class=\"d-flex align-items-center\">");
         sb.append("<i class=\"bi bi-plus-circle-fill me-3 fs-2\"></i>");
         sb.append("<div>");
-        sb.append("<h3 class=\"card-title mb-0 fw-bold\">Nouvel enregistrement</h3>");
+        sb.append("<h3 class=\"card-title mb-0 fw-bold\">Formulaire :</h3>");
         sb.append("<p class=\"mb-0 opacity-75\"><i class=\"bi bi-database me-1\"></i>Système de gestion Oracle</p>");
         sb.append("</div>");
         sb.append("</div>");

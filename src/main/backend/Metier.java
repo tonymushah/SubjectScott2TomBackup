@@ -4,18 +4,17 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import main.base.Err.NoDataToUpdateErr;
-import main.base.context.DBconnect;
+import main.backend.base.Err.NoDataToUpdateErr;
+import main.backend.base.context.DBconnect;
 import main.map.EMP;
-import main.map.HISTOSAL;
 
-public class BackEnd {
-        public static void insertNewHisto(PrintWriter debuger,HISTOSAL newHisto) throws SQLException, ReflectiveOperationException, NoDataToUpdateErr{
+public class Metier {
+        public static void insertNewHisto(PrintWriter debuger,EMP newHisto,String date) throws SQLException, ReflectiveOperationException, NoDataToUpdateErr{
                     Connection conn=DBconnect.connect();
         EMP empwhere=new EMP();
         EMP empvalues=new EMP();
         empwhere.setEMPNO(newHisto.getEMPNO());
-        empvalues.setSAL(newHisto.getMONTANT());
+        empvalues.setSAL(newHisto.getSAL());
 
         Double empLastMontant=((EMP ) empwhere.findByConn(conn).elementAt(0)).getSAL();
         debuger.println(""+empvalues);
@@ -27,13 +26,13 @@ public class BackEnd {
 
         debuger.println("INSERT MONTANT "+empLastMontant);
         
-        newHisto.setMONTANT(empLastMontant);
+        newHisto.setSAL(empLastMontant);
         newHisto.insertByConn(conn);
         conn.commit();
         conn.close();
         }
 
-         public static void insertNewEmp(PrintWriter debuger,EMP newEmp) throws SQLException, ReflectiveOperationException, NoDataToUpdateErr{
+        public static void insertNewEmp(PrintWriter debuger,EMP newEmp) throws SQLException, ReflectiveOperationException, NoDataToUpdateErr{
         debuger.println(""+newEmp);
         Connection conn=DBconnect.connect();
         newEmp.insertByConn(conn);

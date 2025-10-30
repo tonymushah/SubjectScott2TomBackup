@@ -3,12 +3,11 @@ package main.frontend.display.helper;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import main.base.Err.NoDataToUpdateErr;
+import main.backend.base.Err.NoDataToUpdateErr;
 import main.frontend.display.BodyBuilder;
 import main.frontend.display.FormBuilder;
 import main.frontend.display.TableBuilder;
 import main.map.EMP;
-import main.map.HISTOSAL;
 import main.map.V_SALAIRE_DEPT_PROCHE;
 public class PageHelper {
     public static String getContentForInfoPage() throws SQLException, ReflectiveOperationException, NoDataToUpdateErr {
@@ -22,7 +21,7 @@ public class PageHelper {
     }
 
     public static String getContentForPageOne() {
-        return BodyBuilder.makeDefaultBody(FormBuilder.createForm(HISTOSAL.class, "../trUpdate", ""));
+        return BodyBuilder.makeDefaultBody(FormBuilder.createForm(EMP.class, "../trUpdate", "<input required type=\"date\" name=\"DATE_SAL\">"));
     }
 
     public static String getContentForPageTwo() {
