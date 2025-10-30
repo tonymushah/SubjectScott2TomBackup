@@ -9,6 +9,7 @@ import java.util.Map;
 import main.backend.base.func.special.SpecialQueryBuilder;
 import main.backend.base.func.util.ReflectiveManager;
 import main.common.annotation.IdDropDown;
+import main.common.annotation.Required;
 import main.common.annotation.SkipFormulaire;
 
 public class FormBuilder {
@@ -20,7 +21,9 @@ public class FormBuilder {
             sb.append("<select");
             sb.append(" id=\"").append(FieldHelper.getNameHTML(f)).append("\"");
             sb.append(" name=\"").append(FieldHelper.getNameHTML(f)).append("\"");
-            sb.append(" class=\"form-select form-select-lg shadow-sm border-0 rounded-3\">\n");
+            sb.append(" class=\"form-select form-select-lg shadow-sm border-0 rounded-3\"");
+            if(f.isAnnotationPresent(Required.class)) sb.append("  required ");
+            sb.append(">\n");
             sb.append("  <option value=\"\"><i class=\"bi bi-list-ul me-2\"></i>-- Sélectionner --</option>\n");
             for (Map.Entry<String, String> entry : options.entrySet()) {
                 sb.append("  <option value=\"")
@@ -54,6 +57,7 @@ public class FormBuilder {
         }
 
         sb.append(" name=\"").append(FieldHelper.getNameHTML(f)).append("\"");
+        if(f.isAnnotationPresent(Required.class)) sb.append("  required ");
         sb.append(">");
     }
 
