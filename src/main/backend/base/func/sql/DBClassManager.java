@@ -30,7 +30,8 @@ public class DBClassManager {
         pStatement.close();
     }
 
-    public static Vector<Object> RsIntoVector(ResultSet rs, Class<?> clazz) throws ReflectiveOperationException, SQLException {
+    public static Vector<Object> RsIntoVector(ResultSet rs, Class<?> clazz)
+            throws ReflectiveOperationException, SQLException {
         Vector<Object> results = new Vector<>();
         while (rs.next()) {
             Object map = mapResultSetToObject(rs, clazz);
@@ -39,13 +40,15 @@ public class DBClassManager {
         return results;
     }
 
-    public static Vector<Object> findObject0(PreparedStatement pStatement,Class<?> clazz) throws SQLException, ReflectiveOperationException {
+    public static Vector<Object> findObject0(PreparedStatement pStatement, Class<?> clazz)
+            throws SQLException, ReflectiveOperationException {
         ResultSet rs = pStatement.executeQuery();
         Vector<Object> retour = RsIntoVector(rs, clazz);
         rs.close();
         pStatement.close();
         return retour;
     }
+
     public static Vector<Object> findObject0(Connection conn, Object where, String tableName)
             throws SQLException, ReflectiveOperationException {
         PreparedStatement pStatement = DBQueryManager.getPstmtFind(conn, tableName, where);
@@ -55,7 +58,7 @@ public class DBClassManager {
     public static Vector<Object> findObjectByRetour(Connection conn, Object where, Class<?> retour, String tableName)
             throws SQLException, ReflectiveOperationException {
         PreparedStatement pStatement = DBQueryManager.getPstmtFind(conn, tableName, where);
-        return findObject0(pStatement, retour );
+        return findObject0(pStatement, retour);
     }
 
     public static void deleteObject0(Connection conn, Object where, String tableName)
@@ -67,14 +70,19 @@ public class DBClassManager {
 
     public static Object mapResultSetToObject(ResultSet rs, Class<?> clazz)
             throws ReflectiveOperationException, SQLException {
-        System.out.println(""+clazz);
+        System.out.println("" + clazz);
         Object map = clazz.getDeclaredConstructor().newInstance();
         ResultSetMetaData metaData = rs.getMetaData();
         int columnCount = metaData.getColumnCount();
         for (int i = 1; i <= columnCount; i++) {
             String columnName = metaData.getColumnName(i).toUpperCase();
-            Field field = ReflectiveManager.getFieldRecursive(clazz,columnName);
-            handleAppropriateGetField(map, rs, field, i);
+            try {
+                Field field = ReflectiveManager.getFieldRecursive(clazz, columnName);
+                handleAppropriateGetField(map, rs, field, i);
+            } catch (Exception e) {
+                continue;
+            }
+
         }
         return map;
     }

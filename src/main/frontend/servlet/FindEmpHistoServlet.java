@@ -27,7 +27,7 @@ public class FindEmpHistoServlet extends HttpServlet{
         
         try {
             Vector<Object> lo = V_SALAIRE_EMP_PROCHE.findEmp(date, where);
-            String content = ServletHelper.generateContentSearch(where,lo,"#");
+            String content = ServletHelper.generateContentSearch(where , lo , "InfoHistoPersonne");
             out.println(BodyBuilder.makeDefaultBody(content));
             
         } catch (ReflectiveOperationException | SQLException e) {

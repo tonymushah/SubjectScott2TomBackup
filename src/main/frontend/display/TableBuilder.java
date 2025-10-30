@@ -48,7 +48,7 @@ public class TableBuilder {
                 urlParams.append("&&");
             }
             try {
-                urlParams.append(f.getName()).append("=")
+                urlParams.append(FieldHelper.getNameHTML(f)).append("=")
                         .append(java.net.URLEncoder.encode(fieldValue, "UTF-8"));
             } catch (Exception e) {
                 

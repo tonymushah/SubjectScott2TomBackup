@@ -49,4 +49,16 @@
         <url-pattern>/InsertEmp</url-pattern>
     </servlet-mapping>
 
+
+    <servlet>
+        <servlet-name>InfoHistoPersonne</servlet-name>
+        <servlet-class>main.frontend.servlet.InfoHistoPersonne</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>InfoHistoPersonne</servlet-name>
+        <url-pattern>/InfoHistoPersonne</url-pattern>
+    </servlet-mapping>
+    
+
 </web-app>
