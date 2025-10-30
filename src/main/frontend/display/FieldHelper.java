@@ -4,7 +4,7 @@ import java.lang.reflect.Field;
 
 public class FieldHelper {
      public static String getNameHTML(Field field) {
-        return  field.getName();
+        return field.getDeclaringClass().getSimpleName()+"."+field.getName();
     }
 
     public static boolean isNumericType(Class<?> type) {

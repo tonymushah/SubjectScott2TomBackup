@@ -1,5 +1,6 @@
 package main.map;
 
+import java.lang.classfile.instruction.ThrowInstruction;
 import java.sql.Date;
 
 import main.backend.base.annotation.IdDropDown;
@@ -13,6 +14,11 @@ public class HISTOSAL implements SQLMapTable,SetableFromString{
     @IdDropDown(classtoJoin=EMP.class , foreingkey = "EMPNO" , todisplay = "ENAME") 
     Integer EMPNO;
     public HISTOSAL() {
+    }
+    public HISTOSAL(V_SALAIRE_EMP_PROCHE view) {
+        this.DATE_SAL=view.DATE_SAL;
+        this.EMPNO=view.EMPNO;
+        this.MONTANT=view.SALAIRE_A_PAYER;
     }
     public Date getDATE_SAL() {
         return DATE_SAL;

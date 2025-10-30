@@ -12,15 +12,14 @@ import main.backend.base.func.special.SpecialQueryBuilder;
 import main.backend.base.func.util.ReflectiveManager;
 
 public class FormBuilder {
-    
     public static String getdropdown(Field f) {
         StringBuilder sb = new StringBuilder();
 
         try {
             HashMap<String, String> options =SpecialQueryBuilder.getNameSelectable(f);
             sb.append("<select");
-            sb.append(" id=\"").append(f.getName()).append("\"");
-            sb.append(" name=\"").append(f.getName()).append("\"");
+            sb.append(" id=\"").append(FieldHelper.getNameHTML(f)).append("\"");
+            sb.append(" name=\"").append(FieldHelper.getNameHTML(f)).append("\"");
             sb.append(" class=\"form-select form-select-lg shadow-sm border-0 rounded-3\">\n");
             sb.append("  <option value=\"\"><i class=\"bi bi-list-ul me-2\"></i>-- Sélectionner --</option>\n");
             for (Map.Entry<String, String> entry : options.entrySet()) {

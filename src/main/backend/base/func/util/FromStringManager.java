@@ -8,6 +8,9 @@ import java.time.format.DateTimeFormatter;
 import main.backend.base.Err.FromStringException;
 
 public class FromStringManager {
+    public static String getNaiveNameField(String fieldWithDelcaringClass){
+     return fieldWithDelcaringClass.substring(fieldWithDelcaringClass.lastIndexOf('.') + 1);
+    }
     public static Date parseDate(String value){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate localDate = LocalDate.parse(value, formatter);
@@ -43,14 +46,14 @@ public class FromStringManager {
     }
     public static void setFieldFromString(Object e,String name,String value) throws ReflectiveOperationException,FromStringException{
         Class<?> clazz=e.getClass();
-        Field f=ReflectiveManager.getFieldRecursive(clazz,name);
+        Field f=ReflectiveManager.getFieldRecursive(clazz,getNaiveNameField(name));
         Object valueObject=fromString(value, f.getType());
         ReflectiveManager.setFieldObject(f, e, valueObject);
     }
 
     public static String getFieldToString(Object e,String name) throws ReflectiveOperationException{
         Class<?> clazz=e.getClass();
-        Field f=ReflectiveManager.getFieldRecursive(clazz,name);
+        Field f=ReflectiveManager.getFieldRecursive(clazz,getNaiveNameField(name));
        return ReflectiveManager.getFieldObject(f, e).toString();
     }
 }
