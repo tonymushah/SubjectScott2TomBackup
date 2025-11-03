@@ -101,7 +101,35 @@ public class SpecialQueryBuilder {
         DBQueryManager.fillpstmt0(pStatement, lh, index);
         return pStatement;
     }
+   public static PreparedStatement getPstmtFor_SALAIRE_2Dernier(Connection conn, String date,
+        Object where) throws SQLException, ReflectiveOperationException {
 
+    String tableName = "V_SALAIRE_EMP_PROCHE";
+    LinkedHashMap<String, Object> lh = DBQueryManager.getColumnNotNull(where);
+    String s = DBStringManager.getWhereClause(lh);
+    String cond = !s.isEmpty() ? s : " 1=1 ";
+
+    String rqst = "SELECT * FROM (\n" +
+            "    SELECT \n" +
+            "        EMPNO,\n" +
+            "        ENAME,\n" +
+            "        DATE_SAL,\n" +
+            "        ANCIEN_MONTANT AS SALAIRE_A_PAYER\n" +
+            "    FROM " + tableName + "\n" +
+            "    WHERE DATE_SAL <= ?\n" +
+            "    AND " + cond + "\n" +
+            "    ORDER BY DATE_SAL DESC\n" +
+            ") ";
+
+    System.out.println("Requête SQL: " + rqst);
+    PreparedStatement pStatement = conn.prepareStatement(rqst);
+    int index = 1;
+
+    pStatement.setDate(index++, FromStringManager.parseDate(date));
+    index = DBQueryManager.fillpstmt0(pStatement, lh, index);
+
+    return pStatement;
+}
     public static PreparedStatement getPstmtFor_SALAIRE_DEPT(Connection conn, String date, String tableName,
             V_SALAIRE_DEPT_PROCHE where) throws SQLException, ReflectiveOperationException {
         LinkedHashMap<String, Object> lh = DBQueryManager.getColumnNotNull(where);

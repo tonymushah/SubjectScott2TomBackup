@@ -11,14 +11,14 @@ import main.backend.base.func.sql.DBClassManager;
 import main.backend.base.func.util.trait.SQLMap;
 import main.backend.base.func.util.trait.SetableFromString;
 
-
-public class V_SALAIRE_EMP_PROCHE  implements SetableFromString,SQLMap  {
+public class V_SALAIRE_EMP_PROCHE implements SetableFromString, SQLMap {
 
     public V_SALAIRE_EMP_PROCHE() {
 
     }
-    
+
     Integer EMPNO;
+
     public Integer getEMPNO() {
         return EMPNO;
     }
@@ -28,6 +28,7 @@ public class V_SALAIRE_EMP_PROCHE  implements SetableFromString,SQLMap  {
     }
 
     String ENAME;
+
     public String getENAME() {
         return ENAME;
     }
@@ -59,7 +60,7 @@ public class V_SALAIRE_EMP_PROCHE  implements SetableFromString,SQLMap  {
     public static Vector<Object> findEmp(String date, EMP where) throws SQLException, ReflectiveOperationException {
         Connection conn = DBconnect.connect();
         String viewToUse = SpecialQueryBuilder.isGeDateToNow(date) ? "V_SALAIRE_EMP_TODAY" : "V_SALAIRE_EMP_PROCHE";
-        System.out.println(""+viewToUse);
+        System.out.println("" + viewToUse);
         Vector<Object> results = DBClassManager.findObject0(
                 SpecialQueryBuilder.getPstmtFor_SALAIRE_EMP(
                         conn, date,
@@ -67,5 +68,28 @@ public class V_SALAIRE_EMP_PROCHE  implements SetableFromString,SQLMap  {
                 V_SALAIRE_EMP_PROCHE.class);
         conn.close();
         return results;
+    }
+
+    public static Vector<Object> get2dernierSalaire(EMP where,String date) throws SQLException, ReflectiveOperationException {
+        Connection conn = DBconnect.connect();
+          Vector<Object> results = DBClassManager.findObject0(
+                SpecialQueryBuilder.getPstmtFor_SALAIRE_2Dernier(
+                        conn, date,
+                         where),
+                V_SALAIRE_EMP_PROCHE.class);
+        conn.close();
+        return results;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("V_SALAIRE_EMP_PROCHE{");
+        sb.append("EMPNO=").append(EMPNO);
+        sb.append(", ENAME='").append(ENAME != null ? ENAME : "null").append('\'');
+        sb.append(", DATE_SAL=").append(DATE_SAL != null ? DATE_SAL.toString() : "null");
+        sb.append(", SALAIRE_A_PAYER=").append(SALAIRE_A_PAYER);
+        sb.append('}');
+        return sb.toString();
     }
 }
