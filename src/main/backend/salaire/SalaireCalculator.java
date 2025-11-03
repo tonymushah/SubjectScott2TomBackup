@@ -104,6 +104,26 @@ public class SalaireCalculator implements AutoCloseable {
         return map;
     }
 
+    public FicheSalaire get_FicheSalaire(List<V_RUB_HISTO_SAL> sHisto_SALs, List<RUBCONF> rubconfs, List<IRSA> irsas) {
+        HashMap<String, Double> sal_fixes = this.histo_fixe_list(sHisto_SALs);
+        double gain_imposable_total = this.gain_imposable_total(sal_fixes);
+
+        HashMap<String, Double> sal_calc = this.gain_calculable(gain_imposable_total,
+                this.histo_calcule_list(sHisto_SALs), rubconfs);
+        double gain_calculable_total = this.gain_imposable_total(sal_calc);
+
+        double irsa = calculer_irsa_by_entries(irsas, gain_imposable_total);
+
+        double salaire_net = gain_calculable_total + gain_imposable_total - irsa;
+        HashMap<String, Double> rubrique = new HashMap<>();
+
+        rubrique.putAll(sal_fixes);
+        rubrique.putAll(sal_calc);
+        rubrique.put("IRSA", irsa);
+
+        return new FicheSalaire(rubrique, gain_imposable_total, salaire_net);
+    }
+
     @Override
     public void close() throws Exception {
         if (connection != null) {
