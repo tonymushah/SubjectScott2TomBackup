@@ -51,7 +51,7 @@ public class TableBuilder {
                 urlParams.append(FieldHelper.getNameHTML(f)).append("=")
                         .append(java.net.URLEncoder.encode(fieldValue, "UTF-8"));
             } catch (Exception e) {
-                
+
             }
         }
         return urlParams.toString();
@@ -115,7 +115,7 @@ public class TableBuilder {
     public static String createHeader0(Class<?> clazz) {
         StringBuilder sb = new StringBuilder();
         for (Field f : ReflectiveManager.getFieldRecursives(clazz)) {
-            String fieldName = f.getName() ;
+            String fieldName = f.getName();
             String headerClass = "align-middle bg-dark text-white";
             if (FieldHelper.isNumericType(f.getType())) {
                 headerClass += " text-end";
@@ -138,7 +138,7 @@ public class TableBuilder {
         return sb.toString();
     }
 
-    public static String createTable(Vector<Object> lObjects, String hreforRow) throws ReflectiveOperationException {
+    public static <T> String createTable(Vector<T> lObjects, String hreforRow) throws ReflectiveOperationException {
         if (lObjects == null || lObjects.isEmpty()) {
             return createEmptyTable();
         }

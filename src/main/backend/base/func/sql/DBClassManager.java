@@ -30,32 +30,34 @@ public class DBClassManager {
         pStatement.close();
     }
 
-    public static Vector<Object> RsIntoVector(ResultSet rs, Class<?> clazz)
+    public static <T> Vector<T> RsIntoVector(ResultSet rs, Class<T> clazz)
             throws ReflectiveOperationException, SQLException {
-        Vector<Object> results = new Vector<>();
+        Vector<T> results = new Vector<T>();
         while (rs.next()) {
-            Object map = mapResultSetToObject(rs, clazz);
+            T map = mapResultSetToObject(rs, clazz);
             results.add(map);
         }
         return results;
     }
 
-    public static Vector<Object> findObject0(PreparedStatement pStatement, Class<?> clazz)
+    public static <T> Vector<T> findObject0(PreparedStatement pStatement, Class<T> clazz)
             throws SQLException, ReflectiveOperationException {
         ResultSet rs = pStatement.executeQuery();
-        Vector<Object> retour = RsIntoVector(rs, clazz);
+        Vector<T> retour = RsIntoVector(rs, clazz);
         rs.close();
         pStatement.close();
         return retour;
     }
 
-    public static Vector<Object> findObject0(Connection conn, Object where, String tableName)
+    public static <T extends Object> Vector<T> findObject0(Connection conn, T where, String tableName)
             throws SQLException, ReflectiveOperationException {
         PreparedStatement pStatement = DBQueryManager.getPstmtFind(conn, tableName, where);
-        return findObject0(pStatement, where.getClass());
+
+        Class<T> whereClass = (Class<T>) where.getClass();
+        return findObject0(pStatement, whereClass);
     }
 
-    public static Vector<Object> findObjectByRetour(Connection conn, Object where, Class<?> retour, String tableName)
+    public static <T> Vector<T> findObjectByRetour(Connection conn, Object where, Class<T> retour, String tableName)
             throws SQLException, ReflectiveOperationException {
         PreparedStatement pStatement = DBQueryManager.getPstmtFind(conn, tableName, where);
         return findObject0(pStatement, retour);
@@ -68,10 +70,10 @@ public class DBClassManager {
         pStatement.close();
     }
 
-    public static Object mapResultSetToObject(ResultSet rs, Class<?> clazz)
+    public static <T> T mapResultSetToObject(ResultSet rs, Class<T> clazz)
             throws ReflectiveOperationException, SQLException {
         System.out.println("" + clazz);
-        Object map = clazz.getDeclaredConstructor().newInstance();
+        T map = clazz.getDeclaredConstructor().newInstance();
         ResultSetMetaData metaData = rs.getMetaData();
         int columnCount = metaData.getColumnCount();
         for (int i = 1; i <= columnCount; i++) {

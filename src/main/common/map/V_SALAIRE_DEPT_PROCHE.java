@@ -11,7 +11,7 @@ import main.backend.base.func.util.trait.SetableFromString;
 import main.common.annotation.IdDropDown;
 
 public class V_SALAIRE_DEPT_PROCHE implements SetableFromString {
-    @IdDropDown(classtoJoin=DEPT.class , foreingkey = "DEPTNO" , todisplay = "DNAME") 
+    @IdDropDown(classtoJoin = DEPT.class, foreingkey = "DEPTNO", todisplay = "DNAME")
     Integer DEPTNO;
 
     public Integer getDEPTNO() {
@@ -52,19 +52,20 @@ public class V_SALAIRE_DEPT_PROCHE implements SetableFromString {
         NOMBRE_EMP = nOMBRE_EMP;
     }
 
-    public static Vector<Object> findDept(String date,V_SALAIRE_DEPT_PROCHE where) throws SQLException, ReflectiveOperationException {
+    public static Vector<V_SALAIRE_DEPT_PROCHE> findDept(String date, V_SALAIRE_DEPT_PROCHE where)
+            throws SQLException, ReflectiveOperationException {
         Connection conn = DBconnect.connect();
         String viewToUse = SpecialQueryBuilder.isGeDateToNow(date) ? "V_SALAIRE_EMP_TODAY" : "V_SALAIRE_EMP_PROCHE";
         System.out.println("" + viewToUse);
-        Vector<Object> results = DBClassManager.findObject0(
-                SpecialQueryBuilder.getPstmtFor_SALAIRE_DEPT(conn, date, viewToUse,where),
+        Vector<V_SALAIRE_DEPT_PROCHE> results = DBClassManager.findObject0(
+                SpecialQueryBuilder.getPstmtFor_SALAIRE_DEPT(conn, date, viewToUse, where),
                 V_SALAIRE_DEPT_PROCHE.class);
         conn.close();
         return results;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "DEPT{" +
                 "DEPTNO=" + DEPTNO +
                 ", DNAME='" + DNAME + '\'' +

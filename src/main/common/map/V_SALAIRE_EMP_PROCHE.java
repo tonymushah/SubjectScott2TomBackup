@@ -57,11 +57,12 @@ public class V_SALAIRE_EMP_PROCHE implements SetableFromString, SQLMap {
         SALAIRE_A_PAYER = sALAIRE_A_PAYER;
     }
 
-    public static Vector<Object> findEmp(String date, EMP where) throws SQLException, ReflectiveOperationException {
+    public static Vector<V_SALAIRE_EMP_PROCHE> findEmp(String date, EMP where)
+            throws SQLException, ReflectiveOperationException {
         Connection conn = DBconnect.connect();
         String viewToUse = SpecialQueryBuilder.isGeDateToNow(date) ? "V_SALAIRE_EMP_TODAY" : "V_SALAIRE_EMP_PROCHE";
         System.out.println("" + viewToUse);
-        Vector<Object> results = DBClassManager.findObject0(
+        Vector<V_SALAIRE_EMP_PROCHE> results = DBClassManager.findObject0(
                 SpecialQueryBuilder.getPstmtFor_SALAIRE_EMP(
                         conn, date,
                         viewToUse, where),
@@ -70,12 +71,13 @@ public class V_SALAIRE_EMP_PROCHE implements SetableFromString, SQLMap {
         return results;
     }
 
-    public static Vector<Object> get2dernierSalaire(EMP where,String date) throws SQLException, ReflectiveOperationException {
+    public static Vector<V_SALAIRE_EMP_PROCHE> get2dernierSalaire(EMP where, String date)
+            throws SQLException, ReflectiveOperationException {
         Connection conn = DBconnect.connect();
-          Vector<Object> results = DBClassManager.findObject0(
+        Vector<V_SALAIRE_EMP_PROCHE> results = DBClassManager.findObject0(
                 SpecialQueryBuilder.getPstmtFor_SALAIRE_2Dernier(
                         conn, date,
-                         where),
+                        where),
                 V_SALAIRE_EMP_PROCHE.class);
         conn.close();
         return results;

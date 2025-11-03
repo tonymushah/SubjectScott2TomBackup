@@ -66,7 +66,7 @@ public class Metier {
                 histo.fillSetable(allParameters);
 
                 try {
-                        Vector<Object> deux_derniers = V_SALAIRE_EMP_PROCHE.get2dernierSalaire(
+                        Vector<V_SALAIRE_EMP_PROCHE> deux_derniers = V_SALAIRE_EMP_PROCHE.get2dernierSalaire(
                                         emp, allParameters.get("DATE_SAL")[0]);
 
                         double montant = (deux_derniers.size() == 1)
