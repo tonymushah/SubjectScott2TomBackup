@@ -31,3 +31,10 @@ SELECT
     H.HISTO_VAL
 FROM RUBRIQUE R
 JOIN ON HISTO_SAL_2 h on R.RUBNO = H.HISTO_RUB;
+
+create table RUBCONF(
+    RUBNO number(3,0) not null unique,
+    MIN number(10, 2) not null,
+    MAX number(10, 2) not null
+    constraint fk_rubrique FOREIGN KEY (RUBNO) REFERENCES RUBRIQUE(RUBNO)
+);
