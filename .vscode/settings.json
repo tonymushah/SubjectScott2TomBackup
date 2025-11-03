@@ -1,0 +1,9 @@
+{
+    "[java]": {
+        "editor.suggest.snippetsPreventQuickSuggestions": false,
+        "editor.formatOnSave": true
+    },
+    "[sql]": {
+        "editor.formatOnSave": true
+    }
+}
