@@ -19,3 +19,15 @@ create table IRSA(
     SUPE number(10, 2),
     VAL number(2, 2)
 );
+
+create or replace view V_RUB_HISTO_SAL as 
+SELECT 
+    R.RUBNO,
+    R.RUBNOM,
+    R.RUBTYPE,
+    R.RUBMODE,
+    H.HISTO_DATE,
+    H.HISTO_EMP,
+    H.HISTO_VAL
+FROM RUBRIQUE R
+JOIN ON HISTO_SAL_2 h on R.RUBNO = H.HISTO_RUB;
