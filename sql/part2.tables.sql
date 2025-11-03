@@ -7,7 +7,7 @@ create table RUBRIQUE(
 );
 
 create table HISTO_SAL_2(
-    HISTO_DATE varchar2(50) not null,
+    HISTO_DATE DATE not null,
     HISTO_EMP number(4, 0) not null,
     HISTO_RUB number(3, 0) not null,
     HISTO_VAL number(10, 2) not null,

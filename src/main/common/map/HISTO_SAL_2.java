@@ -6,7 +6,7 @@ import main.common.annotation.IdDropDown;
 
 public class HISTO_SAL_2 implements SQLMapTable, SetableFromString {
 
-    private String HISTO_DATE;
+    private java.sql.Date HISTO_DATE;
     @IdDropDown(classtoJoin = EMP.class, foreingkey = "EMPNO", todisplay = "ENAME")
     private Integer HISTO_EMP;
 
@@ -17,11 +17,11 @@ public class HISTO_SAL_2 implements SQLMapTable, SetableFromString {
     public HISTO_SAL_2() {
     }
 
-    public String getHISTO_DATE() {
+    public java.sql.Date getHISTO_DATE() {
         return HISTO_DATE;
     }
 
-    public void setHISTO_DATE(String hISTO_DATE) {
+    public void setHISTO_DATE(java.sql.Date hISTO_DATE) {
         HISTO_DATE = hISTO_DATE;
     }
 

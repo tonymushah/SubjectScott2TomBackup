@@ -13,7 +13,7 @@ public class V_RUB_HISTO_SAL implements SQLMapTable {
     private String RUBNOM;
     private String RUBTYPE;
     private String RUBMODE;
-    private String HISTO_DATE;
+    private java.sql.Date HISTO_DATE;
     private Integer HISTO_EMP;
 
     private Double HISTO_VAL;
@@ -50,11 +50,11 @@ public class V_RUB_HISTO_SAL implements SQLMapTable {
         RUBMODE = rUBMODE;
     }
 
-    public String getHISTO_DATE() {
+    public java.sql.Date getHISTO_DATE() {
         return HISTO_DATE;
     }
 
-    public void setHISTO_DATE(String hISTO_DATE) {
+    public void setHISTO_DATE(java.sql.Date hISTO_DATE) {
         HISTO_DATE = hISTO_DATE;
     }
 
@@ -77,7 +77,7 @@ public class V_RUB_HISTO_SAL implements SQLMapTable {
     public V_RUB_HISTO_SAL() {
     }
 
-    public static Vector<V_RUB_HISTO_SAL> get_histo_sal_emp_date(Connection connection, String date, int empno)
+    public static Vector<V_RUB_HISTO_SAL> get_histo_sal_emp_date(Connection connection, java.sql.Date date, int empno)
             throws SQLException, ReflectiveOperationException {
         return DBClassManager.findObjectByRetour(connection, new HistoSalEmpDatePredicate(empno, date),
                 V_RUB_HISTO_SAL.class, "V_RUB_HISTO_SAL");
