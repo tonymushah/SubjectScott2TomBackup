@@ -38,12 +38,14 @@ public class Metier {
         }
 
         public static void updateSal_Emp(EMP emp, HISTOSAL histo, Connection conn,
-                        PrintWriter debuger,double montant) throws SQLException, ReflectiveOperationException, NoDataToUpdateErr {
+                        PrintWriter debuger, double montant)
+                        throws SQLException, ReflectiveOperationException, NoDataToUpdateErr {
                 EMP whereEmp = EMP.fromEMPNO(emp.getEMPNO());
                 Vector<Object> lemp = whereEmp.find();
                 if (!(((EMP) lemp.get(0)).getSAL() == histo.getMONTANT()) && isValidToFind(histo)) {
                         try {
-                                if(histo.getMONTANT()<=montant);
+                                if (histo.getMONTANT() <= montant)
+                                        ;
                                 updateSal(debuger, histo, conn);
                         } catch (Exception e) {
                                 debuger.println("" + e);
@@ -65,13 +67,13 @@ public class Metier {
 
                 try {
                         Vector<Object> deux_derniers = V_SALAIRE_EMP_PROCHE.get2dernierSalaire(
-                                        emp,allParameters.get("DATE_SAL")[0]);
+                                        emp, allParameters.get("DATE_SAL")[0]);
 
                         double montant = (deux_derniers.size() == 1)
-                                        ? ((V_SALAIRE_EMP_PROCHE) deux_derniers.get(0)).getEMPNO()*2
+                                        ? ((V_SALAIRE_EMP_PROCHE) deux_derniers.get(0)).getEMPNO() * 2
                                         : ((V_SALAIRE_EMP_PROCHE) deux_derniers.get(0)).getEMPNO()
                                                         + ((V_SALAIRE_EMP_PROCHE) deux_derniers.get(1)).getEMPNO();
-                        updateSal_Emp(emp, histo, conn, debuger,montant);
+                        updateSal_Emp(emp, histo, conn, debuger, montant);
                 } catch (NoDataToUpdateErr e) {
                         debuger.println("" + emp);
                         debuger.println("" + e);
