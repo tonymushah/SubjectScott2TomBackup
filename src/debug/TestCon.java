@@ -9,7 +9,7 @@ public class TestCon {
     public static void main(String[] args) {
         try (Connection con = DBconnect.connect()) {
             DatabaseMetaData metaData = con.getMetaData();
-            System.out.format("%s", metaData.getURL());
+            System.out.format("%s \n", metaData.getURL());
         } catch (Exception e) {
             e.printStackTrace();
         }
