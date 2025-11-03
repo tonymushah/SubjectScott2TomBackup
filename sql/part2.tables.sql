@@ -13,3 +13,9 @@ create table HISTO_SAL_2(
     HISTO_VAL number(10, 2) not null,
     constraint fk_rubrique FOREIGN KEY (HISTO_RUB) REFERENCES RUBRIQUE(RUBNO)
 );
+
+create table IRSA(
+    INFE number(10, 2),
+    SUPE number(10, 2),
+    VAL number(2, 2)
+);
