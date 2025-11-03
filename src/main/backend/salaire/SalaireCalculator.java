@@ -1,9 +1,15 @@
 package main.backend.salaire;
 
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Vector;
+import java.util.stream.Collectors;
 
 import main.common.map.IRSA;
+import main.common.map.RUBCONF;
+import main.common.map.RUBRIQUE;
+import main.common.map.V_RUB_HISTO_SAL;
 
 public class SalaireCalculator implements AutoCloseable {
     private Connection connection;
@@ -36,9 +42,73 @@ public class SalaireCalculator implements AutoCloseable {
         return fin_val;
     }
 
+    public HashMap<String, Double> histo_fixe_list(List<V_RUB_HISTO_SAL> complete_histo_sal) {
+        HashMap<String, Double> map = new HashMap<>();
+        for (V_RUB_HISTO_SAL v_RUB_HISTO_SAL : complete_histo_sal) {
+            if (v_RUB_HISTO_SAL.getRUBMODE() == RUBRIQUE.RUBMODE_FIXE) {
+                double val;
+                if (v_RUB_HISTO_SAL.getRUBTYPE().trim() == RUBRIQUE.RUBTYPE_GAIN) {
+                    val = v_RUB_HISTO_SAL.getHISTO_VAL();
+                } else if (v_RUB_HISTO_SAL.getRUBTYPE().trim() == RUBRIQUE.RUBTYPE_RETENUE) {
+                    val = v_RUB_HISTO_SAL.getHISTO_VAL() * -1.0;
+                } else {
+                    val = 0;
+                }
+                map.put(v_RUB_HISTO_SAL.getRUBNOM(), val);
+            }
+        }
+        return map;
+    }
+
+    public List<V_RUB_HISTO_SAL> histo_calcule_list(List<V_RUB_HISTO_SAL> complete_histo_sal) {
+        List<V_RUB_HISTO_SAL> map = new Vector<>();
+        for (V_RUB_HISTO_SAL v_RUB_HISTO_SAL : complete_histo_sal) {
+            if (v_RUB_HISTO_SAL.getRUBMODE() == RUBRIQUE.RUBMODE_CALCULE) {
+                map.add(v_RUB_HISTO_SAL);
+            }
+        }
+        return map;
+    }
+
+    public double gain_imposable_total(HashMap<String, Double> histo_fix_list) {
+        return histo_fix_list.values().stream().collect(Collectors.summarizingDouble(Double::doubleValue)).getSum();
+    }
+
+    public HashMap<String, Double> gain_calculable(double gain_imposable_total,
+            List<V_RUB_HISTO_SAL> histo_calcule_list, List<RUBCONF> rubconfs) {
+
+        HashMap<String, Double> map = new HashMap<>();
+        for (V_RUB_HISTO_SAL v_RUB_HISTO_SAL : histo_calcule_list) {
+            double val;
+            val = ((v_RUB_HISTO_SAL.getHISTO_VAL() * gain_imposable_total) / 100);
+            RUBCONF rubconf = null;
+            for (RUBCONF rubconf2 : rubconfs) {
+                if (rubconf2.getRUBNO() == v_RUB_HISTO_SAL.getRUBNO()) {
+                    if (rubconf2.getMAX() != null && rubconf2.getMIN() != null) {
+                        rubconf = rubconf2;
+                    }
+                }
+            }
+            if (rubconf != null) {
+                if (val < rubconf.getMIN()) {
+                    val = rubconf.getMIN();
+                } else if (val > rubconf.getMAX()) {
+                    val = rubconf.getMAX();
+                }
+            }
+            if (v_RUB_HISTO_SAL.getRUBTYPE() == RUBRIQUE.RUBTYPE_RETENUE) {
+                val *= -1.0;
+            }
+            map.put(v_RUB_HISTO_SAL.getRUBNOM(), val);
+        }
+        return map;
+    }
+
     @Override
     public void close() throws Exception {
-        connection.close();
+        if (connection != null) {
+            connection.close();
+        }
     }
 
 }
