@@ -4,7 +4,12 @@ import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 
 import main.backend.base.context.DBconnect;
-
+/*
+ * 
+ * Just some testing if the connection actually works
+ * 
+ * @author TonyMushah
+ */
 public class TestCon {
     public static void main(String[] args) {
         try (Connection con = DBconnect.connect()) {
