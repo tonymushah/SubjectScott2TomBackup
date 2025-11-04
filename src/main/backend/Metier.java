@@ -12,7 +12,6 @@ import main.backend.base.context.DBconnect;
 import main.backend.base.func.sql.DBQueryManager;
 import main.common.map.EMP;
 import main.common.map.HISTOSAL;
-import main.common.map.V_SALAIRE_DEPT_PROCHE;
 import main.common.map.V_SALAIRE_EMP_PROCHE;
 
 public class Metier {
