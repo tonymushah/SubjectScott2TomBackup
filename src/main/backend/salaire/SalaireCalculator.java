@@ -1,11 +1,14 @@
 package main.backend.salaire;
 
 import java.sql.Connection;
+import java.sql.Date;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 import java.util.stream.Collectors;
 
+import main.backend.base.func.sql.DBClassManager;
 import main.common.map.IRSA;
 import main.common.map.RUBCONF;
 import main.common.map.RUBRIQUE;
@@ -122,6 +125,13 @@ public class SalaireCalculator implements AutoCloseable {
         rubrique.put("IRSA", irsa);
 
         return new FicheSalaire(rubrique, gain_imposable_total, salaire_net);
+    }
+
+    public FicheSalaire getFicheSalaire(int empno, Date mois) throws SQLException, ReflectiveOperationException {
+        List<V_RUB_HISTO_SAL> histo_SALs = V_RUB_HISTO_SAL.get_histo_sal_emp_date(connection, mois, empno);
+        List<RUBCONF> rubconfs = DBClassManager.findObjectByRetour(connection, null, RUBCONF.class, "RUBCONF");
+        List<IRSA> irsas = DBClassManager.findObjectByRetour(connection, null, IRSA.class, "IRSA");
+        return this.get_FicheSalaire(histo_SALs, rubconfs, irsas);
     }
 
     @Override
