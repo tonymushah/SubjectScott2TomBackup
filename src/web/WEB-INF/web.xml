@@ -60,5 +60,14 @@
         <url-pattern>/InfoHistoPersonne</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>FicheSalaireEmp</servlet-name>
+        <servlet-class>main.frontend.servlet.EmpFichePayeServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>FicheSalaireEmp</servlet-name>
+        <url-pattern>/FicheSalaire/affichage</url-pattern>
+    </servlet-mapping>
 
 </web-app>

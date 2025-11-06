@@ -1,6 +1,7 @@
 package main.backend.salaire;
 
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class FicheSalaire {
     private Map<String, Double> rubriques;
@@ -56,6 +57,31 @@ public class FicheSalaire {
 
     public void setPeriode(String periode) {
         this.periode = periode;
+    }
+
+    public String htmlPrint() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("<div class='fiche-salaire'>");
+        builder.append(String.format("<h2>Salaire de %s</h2>", this.getEmpnom()));
+        builder.append(String.format("<p>Periode: %s</p>", this.getPeriode()));
+        builder.append("<section class='fs-rubriques'>");
+
+        builder.append("<h3>Rubriques</h3>");
+        for (Entry<String, Double> rubrique : this.getRubriques().entrySet()) {
+            builder.append("<article class='rubrique'>");
+            builder.append(String.format("<span class='rubrique-nom'>%s:</span> <span>%s</span>", rubrique.getKey(),
+                    rubrique.getValue().toString()));
+            builder.append("</article>");
+        }
+
+        builder.append("</section>");
+        builder.append("<hr/>");
+        builder.append("<section class='total'>");
+        builder.append(String.format("<h3>Salaire net: %s</h3>", this.getSalaire_net()));
+        builder.append("</section>");
+
+        builder.append("</div>");
+        return builder.toString();
     }
 
 }
