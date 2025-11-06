@@ -6,6 +6,8 @@ public class FicheSalaire {
     private Map<String, Double> rubriques;
     private double gain_imposable_fixe;
     private double salaire_net;
+    private String empnom;
+    private String periode;
 
     public Map<String, Double> getRubriques() {
         return rubriques;
@@ -38,6 +40,22 @@ public class FicheSalaire {
         this.rubriques = rubriques;
         this.gain_imposable_fixe = gain_imposable_fixe;
         this.salaire_net = salaire_net;
+    }
+
+    public String getEmpnom() {
+        return empnom;
+    }
+
+    public void setEmpnom(String empnom) {
+        this.empnom = empnom;
+    }
+
+    public String getPeriode() {
+        return periode;
+    }
+
+    public void setPeriode(String periode) {
+        this.periode = periode;
     }
 
 }
