@@ -320,3 +320,8 @@
     background: linear-gradient(135deg, #d1ecf1, #bee5eb);
     border: none;
 }
+
+.fiche-salaire {
+    display: grid;
+    
+}
