@@ -135,7 +135,7 @@ public class SalaireCalculator implements AutoCloseable {
         List<IRSA> irsas = DBClassManager.findObjectByRetour(connection, null, IRSA.class, "IRSA");
         FicheSalaire ficheSalaire = this.get_FicheSalaire(histo_SALs, rubconfs, irsas);
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
         ficheSalaire.setPeriode(mois.toLocalDate().format(formatter));
         EMP emp = new EMP();
