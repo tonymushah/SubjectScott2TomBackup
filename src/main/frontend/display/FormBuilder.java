@@ -22,7 +22,8 @@ public class FormBuilder {
             sb.append(" id=\"").append(FieldHelper.getNameHTML(f)).append("\"");
             sb.append(" name=\"").append(FieldHelper.getNameHTML(f)).append("\"");
             sb.append(" class=\"form-select form-select-lg shadow-sm border-0 rounded-3\"");
-            if(f.isAnnotationPresent(Required.class)) sb.append("  required ");
+            if (f.isAnnotationPresent(Required.class))
+                sb.append("  required ");
             sb.append(">\n");
             sb.append("  <option value=\"\"><i class=\"bi bi-list-ul me-2\"></i>-- Sélectionner --</option>\n");
             for (Map.Entry<String, String> entry : options.entrySet()) {
@@ -57,7 +58,8 @@ public class FormBuilder {
         }
 
         sb.append(" name=\"").append(FieldHelper.getNameHTML(f)).append("\"");
-        if(f.isAnnotationPresent(Required.class)) sb.append("  required ");
+        if (f.isAnnotationPresent(Required.class))
+            sb.append("  required ");
         sb.append(">");
     }
 
@@ -67,7 +69,7 @@ public class FormBuilder {
 
         sb.append("<div class=\"mb-4\">");
         sb.append("<label class=\"form-label fw-bold text-gradient mb-3 d-flex align-items-center\">")
-                .append("<i class=\"bi bi-tag-fill me-2\"></i>" + f.getName() ).append("</label>");
+                .append("<i class=\"bi bi-tag-fill me-2\"></i>" + f.getName()).append("</label>");
 
         if (f.isAnnotationPresent(IdDropDown.class)) {
             sb.append(getdropdown(f));
@@ -128,6 +130,27 @@ public class FormBuilder {
         return sb;
     }
 
+    public static StringBuilder getPreparedStringBuilderGetForm(String action, String OtherInputsHtml) {
+        StringBuilder sb = new StringBuilder("<form method=\"GET\" class=\"container mt-4\" ")
+                .append(" action=\"").append(action).append("\">\n");
+
+        sb.append("<div class=\"card border-0 shadow-lg rounded-4 overflow-hidden\">");
+        sb.append("<div class=\"card-header gradient-bg text-white py-4\">");
+        sb.append("<div class=\"d-flex align-items-center\">");
+        sb.append("<i class=\"bi bi-plus-circle-fill me-3 fs-2\"></i>");
+        sb.append("<div>");
+        sb.append("<h3 class=\"card-title mb-0 fw-bold\">Formulaire :</h3>");
+        sb.append("<p class=\"mb-0 opacity-75\"><i class=\"bi bi-database me-1\"></i>Système de gestion Oracle</p>");
+        sb.append("</div>");
+        sb.append("</div>");
+        sb.append("</div>");
+
+        sb.append("<div class=\"card-body p-5 bg-light\">");
+        addOptionalInputHtml(sb, OtherInputsHtml);
+
+        return sb;
+    }
+
     public static void fillStringBuilderForm(StringBuilder sb) {
         sb.append("<div class=\"d-grid gap-3 mt-5\">");
         sb.append(
@@ -153,8 +176,30 @@ public class FormBuilder {
         return sb.toString();
     }
 
+    public static String createGetForm(Class<?> clazz, String action, String OtherInputsHtml, boolean skipmode) {
+        StringBuilder sb = getPreparedStringBuilderGetForm(action, OtherInputsHtml);
+        sb.append(createFrom0(clazz, skipmode));
+
+        sb.append("<input type=\"hidden\" name=\"class\" ")
+                .append("value=\"").append(clazz.getName()).append("\" >\n");
+
+        fillStringBuilderForm(sb);
+        return sb.toString();
+    }
+
     public static String createForm(Class<?>[] clazz, String action, String OtherInputsHtml, boolean[] skipmodes) {
         StringBuilder sb = getPreparedStringBuilderForm(action, OtherInputsHtml);
+
+        for (int i = 0; i < clazz.length; i++) {
+            sb.append("<h1>Formulaire pour : ").append(clazz[i].getSimpleName()).append("</h1>");
+            sb.append(createFrom0(clazz[i], skipmodes[i]));
+        }
+        fillStringBuilderForm(sb);
+        return sb.toString();
+    }
+
+    public static String createGetForm(Class<?>[] clazz, String action, String OtherInputsHtml, boolean[] skipmodes) {
+        StringBuilder sb = getPreparedStringBuilderGetForm(action, OtherInputsHtml);
 
         for (int i = 0; i < clazz.length; i++) {
             sb.append("<h1>Formulaire pour : ").append(clazz[i].getSimpleName()).append("</h1>");
